@@ -1,6 +1,6 @@
-# Ada-gence tout RISC
+# Ada-Gence Tout RISC (AGTR)
 
-ADA implementation of a RISC Processor
+ADA implementation of a 16bit RISC processor emulator.
 
 ## Requirements
 
@@ -25,5 +25,6 @@ gprbuild -XBuild=Debug
 
 ## Project content
 
+doc/        Documentation
 src/        Source Code
 tests/      Testsuite
