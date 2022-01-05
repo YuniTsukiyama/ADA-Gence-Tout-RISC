@@ -3,8 +3,6 @@ with Misc;
 
 package Lexer is
 
-   type Input_Type is access String;
-
    type Token_Type is (Word,
                        Register,
                        Immediate,
@@ -27,10 +25,13 @@ package Lexer is
    end record;
 
    type Instance is tagged record
-      Input    : Input_Type;
+      Input    : Misc.Input_Ptr;
       Pos      : Integer := 1;
       Curr_Tok : Token;
    end record;
+
+   --  Initialize the Lexer
+   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
 
    --  Pop a token
    function Pop_Tok (Self : in out Instance) return Token;

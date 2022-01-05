@@ -1,5 +1,6 @@
 with Instruction;
 with Lexer;
+with Misc;
 with Operand;
 
 package Parser is
@@ -8,14 +9,18 @@ package Parser is
       Lexer_Inst : Lexer.Instance := (others => <>);
    end record;
 
-   function Parse (Self : in out Instance) return Instruction.Instance;
+   --  Initialize the Parser
+   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
+
+   procedure Parse (Self  : in out Instance;
+                    Instr : in out Instruction.Instance);
 
 private
 
-   function Parse_Operand (Self : in out Instance)
+   function Parse_Operand (Self  : in out Instance)
       return Operand.Instance;
 
-   function Parse_Instruction (Self : in out Instance)
-      return Instruction.Instance;
+   procedure Parse_Instruction (Self  : in out Instance;
+                                Instr : in out Instruction.Instance);
 
 end Parser;

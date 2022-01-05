@@ -23,9 +23,8 @@ package body Parser is
       end case;
    end Parse_Operand;
 
-   function Parse_Instruction (Self : in out Instance)
-      return Instruction.Instance is
-      Instr : Instruction.Instance;
+   procedure Parse_Instruction (Self  : in out Instance;
+                                Instr : in out Instruction.Instance) is
       Curr_Tok : Lexer.Token;
    begin
       --  Parse mnemonic
@@ -37,7 +36,7 @@ package body Parser is
       Curr_Tok := Self.Lexer_Inst.Peek_Tok;
       if Curr_Tok.Tok_Type = Lexer.Newline
       then
-         return Instr;
+         return;
       end if;
 
       --  Parse left operand
@@ -47,7 +46,7 @@ package body Parser is
       Curr_Tok := Self.Lexer_Inst.Peek_Tok;
       if Curr_Tok.Tok_Type = Lexer.Newline
       then
-         return Instr;
+         return;
       end if;
 
       --  Parse separator
@@ -59,14 +58,20 @@ package body Parser is
       --  There should not be any token left
       Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Newline);
 
-      return Instr;
+      return;
 
    end Parse_Instruction;
 
-   function Parse (Self : in out Instance) return Instruction.Instance is
+   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr) is
+   begin
+      Self.Lexer_Inst.Initialize (Input);
+   end Initialize;
+
+   procedure Parse (Self  : in out Instance;
+                    Instr : in out Instruction.Instance) is
    begin
       --  TODO: Handle labels
-      return Self.Parse_Instruction;
+      Self.Parse_Instruction (Instr);
    end Parse;
 
 end Parser;
