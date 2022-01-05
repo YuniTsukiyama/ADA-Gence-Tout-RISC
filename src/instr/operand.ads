@@ -23,6 +23,8 @@ package Operand is
       end case;
    end record;
 
+   type Operand_Ptr is access Instance;
+
    procedure Display (Self : Instance);
 
 end Operand;

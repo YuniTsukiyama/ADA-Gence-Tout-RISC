@@ -1,3 +1,6 @@
+with Ada.Containers.Doubly_Linked_Lists;
+with Ada.Finalization;
+
 with Operand;
 
 package Instruction is
@@ -16,14 +19,20 @@ package Instruction is
                      Op_store,
                      Op_jmpz);
 
-   type Operand_Type is access Operand.Instance;
-
    --  Represents an instruction
-   type Instance is tagged record
+   type Instance is
+     new Ada.Finalization.Controlled with
+   record
       Operation   : Mnemonic;
-      Left, Right : Operand_Type;
+      Left, Right : Operand.Operand_Ptr;
    end record;
 
+   overriding procedure Finalize (Self : in out Instance);
+
    procedure Display (Self : Instance);
+
+   --  A list of instructions
+   package Instruction_List is
+      new Ada.Containers.Doubly_Linked_Lists (Instance);
 
 end Instruction;
