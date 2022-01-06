@@ -1,9 +1,12 @@
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 
---  Defines a function to parse an input string
 package body Parser is
 
    use type Lexer.Token_Type;
+
+   -------------------
+   -- Parse_Operand --
+   -------------------
 
    function Parse_Operand (Self : in out Instance)
       return Operand.Instance is
@@ -22,6 +25,10 @@ package body Parser is
             return (Op_Type => Operand.Error);
       end case;
    end Parse_Operand;
+
+   -----------------------
+   -- Parse_Instruction --
+   -----------------------
 
    procedure Parse_Instruction (Self  : in out Instance;
                                 Instr : in out Instruction.Instance) is
@@ -62,13 +69,21 @@ package body Parser is
 
    end Parse_Instruction;
 
+   ----------------
+   -- Initialize --
+   ----------------
+
    procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr) is
    begin
       Self.Lexer_Inst.Initialize (Input);
    end Initialize;
 
+   -----------
+   -- Parse --
+   -----------
+
    procedure Parse (Self  : in out Instance;
-                    Instr : in out Instruction.Instance) is
+                    Instr : out Instruction.Instance) is
    begin
       --  TODO: Handle labels
       Self.Parse_Instruction (Instr);

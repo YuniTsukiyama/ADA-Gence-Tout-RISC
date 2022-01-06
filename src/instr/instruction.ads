@@ -5,7 +5,6 @@ with Operand;
 
 package Instruction is
 
-   --  Defines each instruction's mnemonics
    type Mnemonic is (Op_mov,
                      Op_add,
                      Op_sub,
@@ -18,21 +17,23 @@ package Instruction is
                      Op_load,
                      Op_store,
                      Op_jmpz);
+   --  Defines each instruction's mnemonics
 
-   --  Represents an instruction
    type Instance is
       new Ada.Finalization.Controlled with
    record
       Operation   : Mnemonic;
       Left, Right : Operand.Operand_Ptr;
    end record;
+   --  Represents an instruction
 
    overriding procedure Finalize (Self : in out Instance);
 
    procedure Display (Self : Instance);
+   --  Dump an Instruction instance
 
+   package Instruction_List is new Ada.Containers.Doubly_Linked_Lists
+      (Element_Type => Instance);
    --  A list of instructions
-   package Instruction_List is
-      new Ada.Containers.Doubly_Linked_Lists (Instance);
 
 end Instruction;

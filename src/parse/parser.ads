@@ -9,11 +9,12 @@ package Parser is
       Lexer_Inst : Lexer.Instance;
    end record;
 
-   --  Initialize the Parser
    procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
+   --  Initialize the Parser
 
    procedure Parse (Self  : in out Instance;
-                    Instr : in out Instruction.Instance);
+                    Instr : out Instruction.Instance);
+   --  Parse the current input and fill the given Instr
 
 private
 

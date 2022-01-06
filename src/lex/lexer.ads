@@ -34,39 +34,39 @@ package Lexer is
       Curr_Tok : Token;
    end record;
 
-   --  Initialize the Lexer
    procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
+   --  Initialize the Lexer
 
-   --  Finalize the Lexer
    overriding procedure Finalize (Self : in out Instance);
+   --  Finalize the Lexer
 
-   --  Pop a token
    function Pop_Tok (Self : in out Instance) return Token;
+   --  Pop a token
 
-   --  Pop a token and return an error if not the expected one
    function Expect_Tok (Self : in out Instance; Tok_Type : Token_Type)
       return Token;
+   --  Pop a token and return an error if not the expected one
 
-   --  Peek a token
    function Peek_Tok (Self : in out Instance) return Token;
+   --  Peek a token
 
-   --  Discard a token
    procedure Discard_Tok (Self : in out Instance);
+   --  Discard a token
 
 private
 
-   --  Increment Pos as long as there is a space
    procedure Eat_Blank (Self : in out Instance);
+   --  Increment Pos as long as there is a space
 
-   --  Lex a token
    function Lex_Tok (Self : in out Instance) return Token;
+   --  Lex a token
 
-   --  Lex spacific tokens
    function Lex_Reg       (Self : in out Instance) return Token;
    function Lex_Imm       (Self : in out Instance) return Token;
    function Lex_Separator (Self : in out Instance) return Token;
    function Lex_Word      (Self : in out Instance) return Token;
    function Lex_Newline   (Self : Instance)        return Token;
    function Lex_Error     (Self : Instance)        return Token;
+   --  Lex a specific token
 
 end Lexer;

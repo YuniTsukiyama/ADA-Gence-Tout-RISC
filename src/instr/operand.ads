@@ -3,12 +3,12 @@ with Misc;
 
 package Operand is
 
-   --  Define each operand type
    type Operand_Type is (Register,
                          Immediate,
                          Label,
                          Error,
                          None);
+   --  Defines each operand type
 
    type Instance (Op_Type : Operand_Type) is tagged record
       case Op_Type is
@@ -26,5 +26,6 @@ package Operand is
    type Operand_Ptr is access Instance;
 
    procedure Display (Self : Instance);
+   --  Dump an Operand instance
 
 end Operand;

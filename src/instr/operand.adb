@@ -3,6 +3,10 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 package body Operand is
 
+   -------------
+   -- Display --
+   -------------
+
    procedure Display (Self : Instance) is
    begin
       case Self.Op_Type is

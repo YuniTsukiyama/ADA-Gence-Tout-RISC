@@ -4,6 +4,10 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 package body Lexer is
 
+   ---------------
+   -- Eat_Blank --
+   ---------------
+
    procedure Eat_Blank (Self : in out Instance) is
    begin
       while (Self.Pos <= Self.Input'Last)
@@ -12,6 +16,10 @@ package body Lexer is
          Self.Pos := Self.Pos + 1;
       end loop;
    end Eat_Blank;
+
+   -------------
+   -- Lex_Reg --
+   -------------
 
    function Lex_Reg (Self : in out Instance) return Token is
       Tok : Token (Register);
@@ -35,6 +43,10 @@ package body Lexer is
                                    & To_String (Reg_Name) & "`");
          return Self.Lex_Error;
    end Lex_Reg;
+
+   -------------
+   -- Lex_Imm --
+   -------------
 
    function Lex_Imm (Self : in out Instance) return Token is
       Tok : Token (Immediate);
@@ -70,12 +82,20 @@ package body Lexer is
          return Self.Lex_Error;
    end Lex_Imm;
 
+   -------------------
+   -- Lex_Separator --
+   -------------------
+
    function Lex_Separator (Self : in out Instance) return Token is
       Tok : Token (Separator);
    begin
       Self.Pos := Self.Pos + 1;
       return Tok;
    end Lex_Separator;
+
+   --------------
+   -- Lex_Word --
+   --------------
 
    function Lex_Word (Self : in out Instance) return Token is
       Tok : Token (Word);
@@ -92,17 +112,29 @@ package body Lexer is
       return Tok;
    end Lex_Word;
 
+   -----------------
+   -- Lex_Newline --
+   -----------------
+
    function Lex_Newline (Self : Instance) return Token is
       Tok : Token (Newline);
    begin
       return Tok;
    end Lex_Newline;
 
+   ---------------
+   -- Lex_Error --
+   ---------------
+
    function Lex_Error (Self : Instance) return Token is
       Tok : Token (Error);
    begin
       return Tok;
    end Lex_Error;
+
+   -------------
+   -- Lex_Tok --
+   -------------
 
    function Lex_Tok (Self : in out Instance) return Token is
    begin
@@ -121,6 +153,10 @@ package body Lexer is
       end case;
    end Lex_Tok;
 
+   ----------------
+   -- Initialize --
+   ----------------
+
    procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr) is
    begin
       Misc.Free_Input_Ptr (Self.Input);
@@ -129,10 +165,18 @@ package body Lexer is
       Self.Curr_Tok := (others => <>);
    end Initialize;
 
+   --------------
+   -- Finalize --
+   --------------
+
    overriding procedure Finalize (Self : in out Instance) is
    begin
       Misc.Free_Input_Ptr (Self.Input);
    end Finalize;
+
+   -------------
+   -- Pop_Tok --
+   -------------
 
    function Pop_Tok (Self : in out Instance) return Token is
       Tok : Token;
@@ -146,6 +190,10 @@ package body Lexer is
       Self.Discard_Tok;
       return Tok;
    end Pop_Tok;
+
+   ----------------
+   -- Expect_Tok --
+   ----------------
 
    function Expect_Tok (Self : in out Instance; Tok_Type : Token_Type)
       return Token is
@@ -162,6 +210,10 @@ package body Lexer is
       return Tok;
    end Expect_Tok;
 
+   --------------
+   -- Peek_Tok --
+   --------------
+
    function Peek_Tok (Self : in out Instance) return Token is
    begin
       if Self.Curr_Tok.Tok_Type = None
@@ -171,6 +223,10 @@ package body Lexer is
 
       return Self.Curr_Tok;
    end Peek_Tok;
+
+   -----------------
+   -- Discard_Tok --
+   -----------------
 
    procedure Discard_Tok (Self : in out Instance) is
    begin

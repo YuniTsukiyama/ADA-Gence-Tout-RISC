@@ -3,13 +3,21 @@ with Ada.Unchecked_Deallocation;
 
 package body Instruction is
 
+   --------------
+   -- Finalize --
+   --------------
+
    overriding procedure Finalize (Self : in out Instance) is
-      procedure Deallocate is new Ada.Unchecked_Deallocation
-         (Operand.Instance, Operand.Operand_Ptr);
+      procedure Free is new Ada.Unchecked_Deallocation
+         (Object => Operand.Instance, Name => Operand.Operand_Ptr);
    begin
-      Deallocate (Self.Left);
-      Deallocate (Self.Right);
+      Free (Self.Left);
+      Free (Self.Right);
    end Finalize;
+
+   -------------
+   -- Display --
+   -------------
 
    procedure Display (Self : Instance) is
    begin
