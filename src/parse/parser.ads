@@ -6,7 +6,7 @@ with Operand;
 package Parser is
 
    type Instance is tagged record
-      Lexer_Inst : Lexer.Instance := (others => <>);
+      Lexer_Inst : Lexer.Instance;
    end record;
 
    --  Initialize the Parser

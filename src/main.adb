@@ -24,9 +24,6 @@ begin
       --  Parse it
       Parser_Inst.Parse (Curr_Instr);
       Instrs.Append (Curr_Instr);
-
-      --  And free it
-      Misc.Free_Input_Ptr (Curr_Line); -- TODO: Free from lexer's methods
    end loop;
 
    Curr_Instr.Left  := null;

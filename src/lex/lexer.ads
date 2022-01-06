@@ -1,3 +1,5 @@
+with Ada.Finalization;
+
 with Cpu;
 with Misc;
 
@@ -24,7 +26,9 @@ package Lexer is
       end case;
    end record;
 
-   type Instance is tagged record
+   type Instance is
+      new Ada.Finalization.Controlled with
+   record
       Input    : Misc.Input_Ptr;
       Pos      : Integer := 1;
       Curr_Tok : Token;
@@ -32,6 +36,9 @@ package Lexer is
 
    --  Initialize the Lexer
    procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
+
+   --  Finalize the Lexer
+   overriding procedure Finalize (Self : in out Instance);
 
    --  Pop a token
    function Pop_Tok (Self : in out Instance) return Token;

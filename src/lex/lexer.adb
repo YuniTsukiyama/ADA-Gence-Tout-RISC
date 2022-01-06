@@ -123,10 +123,16 @@ package body Lexer is
 
    procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr) is
    begin
+      Misc.Free_Input_Ptr (Self.Input);
       Self.Input    := Input;
       Self.Pos      := 1;
       Self.Curr_Tok := (others => <>);
    end Initialize;
+
+   overriding procedure Finalize (Self : in out Instance) is
+   begin
+      Misc.Free_Input_Ptr (Self.Input);
+   end Finalize;
 
    function Pop_Tok (Self : in out Instance) return Token is
       Tok : Token;

@@ -21,7 +21,7 @@ package Instruction is
 
    --  Represents an instruction
    type Instance is
-     new Ada.Finalization.Controlled with
+      new Ada.Finalization.Controlled with
    record
       Operation   : Mnemonic;
       Left, Right : Operand.Operand_Ptr;
