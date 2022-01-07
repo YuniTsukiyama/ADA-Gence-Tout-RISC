@@ -3,11 +3,11 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 package body Operand is
 
-   -------------
-   -- Display --
-   -------------
+   ----------
+   -- Dump --
+   ----------
 
-   procedure Display (Self : Instance) is
+   procedure Dump (Self : Instance) is
    begin
       case Self.Op_Type is
          when Operand.Register =>
@@ -19,6 +19,6 @@ package body Operand is
          when others =>
             null;
       end case;
-   end Display;
+   end Dump;
 
 end Operand;

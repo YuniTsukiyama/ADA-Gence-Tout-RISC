@@ -29,7 +29,7 @@ package Instruction is
 
    overriding procedure Finalize (Self : in out Instance);
 
-   procedure Display (Self : Instance);
+   procedure Dump (Self : Instance);
    --  Dump an Instruction instance
 
    package Instruction_List is new Ada.Containers.Doubly_Linked_Lists

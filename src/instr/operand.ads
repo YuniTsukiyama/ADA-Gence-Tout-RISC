@@ -25,7 +25,7 @@ package Operand is
 
    type Operand_Ptr is access Instance;
 
-   procedure Display (Self : Instance);
+   procedure Dump (Self : Instance);
    --  Dump an Operand instance
 
 end Operand;

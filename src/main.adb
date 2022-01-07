@@ -1,17 +1,19 @@
-with Ada.Command_Line; use Ada.Command_Line;
 with Ada.Text_IO; use Ada.Text_IO;
 
+with Cli;
 with Instruction;
 with Parser;
 
 procedure Main is
-   Input_File  : constant String := Argument (1);
+   Opt         : Cli.Options;
    File        : File_Type;
    Instrs      : Instruction.Instruction_List.List;
    Parser_Inst : Parser.Instance;
    Curr_Instr  : Instruction.Instance;
 begin
-   Open (File, In_File, Input_File);
+   Cli.Parse_Options (Opt);
+
+   Open (File, In_File, Opt.Input_File.all);
 
    --  Parse each instructions and build a list
    while not End_Of_File (File) loop

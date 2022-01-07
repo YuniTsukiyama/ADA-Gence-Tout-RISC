@@ -15,20 +15,20 @@ package body Instruction is
       Free (Self.Right);
    end Finalize;
 
-   -------------
-   -- Display --
-   -------------
+   ----------
+   -- Dump --
+   ----------
 
-   procedure Display (Self : Instance) is
+   procedure Dump (Self : Instance) is
    begin
       Put_Line ("Mnemonic: " & Self.Operation'Image);
 
       Put ("Left  ");
-      Self.Left.Display;
+      Self.Left.Dump;
 
       Put ("Right ");
-      Self.Right.Display;
+      Self.Right.Dump;
 
-   end Display;
+   end Dump;
 
 end Instruction;
