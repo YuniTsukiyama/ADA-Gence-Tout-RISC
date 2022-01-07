@@ -13,6 +13,11 @@ procedure Main is
 begin
    Cli.Parse_Options (Opt);
 
+   if Opt.Help then
+      Put_Line ("Todo");
+      exit;
+   end if;
+
    Open (File, In_File, Opt.Input_File.all);
 
    --  Parse each instructions and build a list

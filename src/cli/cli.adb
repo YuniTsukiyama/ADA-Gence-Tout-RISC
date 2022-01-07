@@ -11,9 +11,9 @@ package body Cli is
       loop
          case Getopt ("-help -dump-instr") is
             when '-'    =>
-               if Full_Switch = "--help" then
+               if Full_Switch = "-help" then
                   Opt.Help := True;
-               elsif Full_Switch = "--dump-instr" then
+               elsif Full_Switch = "-dump-instr" then
                   Opt.Dump_Instructions := True;
                end if;
             when others =>
