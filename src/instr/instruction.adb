@@ -7,7 +7,7 @@ package body Instruction is
    -- Finalize --
    --------------
 
-   overriding procedure Finalize (Self : in out Instance) is
+   procedure Finalize (Self : in out Instance) is
       procedure Free is new Ada.Unchecked_Deallocation
          (Object => Operand.Instance, Name => Operand.Operand_Ptr);
    begin
@@ -19,7 +19,7 @@ package body Instruction is
    -- Dump --
    ----------
 
-   procedure Dump (Self : Instance) is
+   procedure Dump (Self : in out Instance) is
    begin
       Put_Line ("Mnemonic: " & Self.Operation'Image);
 

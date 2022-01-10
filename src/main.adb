@@ -15,7 +15,7 @@ begin
 
    if Opt.Help then
       Put_Line ("Todo");
-      exit;
+      return;
    end if;
 
    Open (File, In_File, Opt.Input_File.all);
@@ -30,8 +30,23 @@ begin
       Instrs.Append (Curr_Instr);
    end loop;
 
+   while not Instrs.Is_Empty loop
+      Curr_Instr := Instrs.First_Element;
+
+      --  Display instruction if needed
+      if Opt.Dump_Instructions then
+         Curr_Instr.Dump;
+      end if;
+
+      Curr_Instr.Finalize;
+      Instrs.Delete_First;
+
+   end loop;
+
    Curr_Instr.Left  := null;
    Curr_Instr.Right := null;
 
+   --  Free various allocated objects
    Instrs.Clear;
+   Cli.Finalize (Opt);
 end Main;

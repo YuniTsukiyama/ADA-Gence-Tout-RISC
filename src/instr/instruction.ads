@@ -1,5 +1,4 @@
 with Ada.Containers.Doubly_Linked_Lists;
-with Ada.Finalization;
 
 with Operand;
 
@@ -19,17 +18,16 @@ package Instruction is
                      Op_jmpz);
    --  Defines each instruction's mnemonics
 
-   type Instance is
-      new Ada.Finalization.Controlled with
-   record
+   type Instance is tagged record
       Operation   : Mnemonic;
       Left, Right : Operand.Operand_Ptr;
    end record;
    --  Represents an instruction
 
-   overriding procedure Finalize (Self : in out Instance);
+   procedure Finalize (Self : in out Instance);
+   --  Finalize an instruction
 
-   procedure Dump (Self : Instance);
+   procedure Dump (Self : in out Instance);
    --  Dump an Instruction instance
 
    package Instruction_List is new Ada.Containers.Doubly_Linked_Lists

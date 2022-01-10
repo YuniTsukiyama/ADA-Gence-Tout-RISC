@@ -3,8 +3,11 @@ with Ada.Unchecked_Deallocation;
 
 package Misc is
 
-   type Input_Ptr is access String;
+   type String_Ptr is access String;
    --  String pointer
+
+   type Input_Ptr is access String;
+   --  String pointer representing input
 
    procedure Free_Input_Ptr is new Ada.Unchecked_Deallocation
       (Object => String, Name => Input_Ptr);

@@ -1,6 +1,19 @@
+with Ada.Unchecked_Deallocation;
+
 with GNAT.Command_Line; use GNAT.Command_Line;
 
 package body Cli is
+
+   --------------
+   -- Finalize --
+   --------------
+
+   procedure Finalize (Opt : in out Options) is
+      procedure Free is new Ada.Unchecked_Deallocation
+         (Object => String, Name => Misc.String_Ptr);
+   begin
+      Free (Opt.Input_File);
+   end Finalize;
 
    -------------------
    -- Parse_Options --
