@@ -13,8 +13,10 @@ procedure Main is
 begin
    Cli.Parse_Options (Opt);
 
+   --  Display help if needed
    if Opt.Help then
-      Put_Line ("Todo");
+      Cli.Display_Help;
+      Cli.Finalize (Opt);
       return;
    end if;
 

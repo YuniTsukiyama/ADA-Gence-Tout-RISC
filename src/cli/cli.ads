@@ -16,4 +16,7 @@ package Cli is
    procedure Parse_Options (Opt : out Options);
    --  Parse options from the command line and fill the given record
 
+   procedure Display_Help;
+   --  Display help to stdout
+
 end Cli;

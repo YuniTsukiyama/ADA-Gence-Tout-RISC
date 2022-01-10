@@ -1,3 +1,4 @@
+with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Unchecked_Deallocation;
 
 with GNAT.Command_Line; use GNAT.Command_Line;
@@ -36,5 +37,17 @@ package body Cli is
 
       Opt.Input_File := new String'(Get_Argument);
    end Parse_Options;
+
+   ------------------
+   -- Display_Help --
+   ------------------
+
+   procedure Display_Help is
+   begin
+      Put_Line ("Usage: agtr [options] file...");
+      Put_Line ("Options:");
+      Put_Line ("  --help              Display this information");
+      Put_Line ("  --dump-instr        Dump the instructions");
+   end Display_Help;
 
 end Cli;
