@@ -45,9 +45,6 @@ begin
 
    end loop;
 
-   Curr_Instr.Left  := null;
-   Curr_Instr.Right := null;
-
    --  Free various allocated objects
    Instrs.Clear;
    Cli.Finalize (Opt);
