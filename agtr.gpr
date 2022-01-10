@@ -28,10 +28,11 @@ project AGTR is
       case Build is
          when "Debug" =>
             for Default_Switches ("Ada") use
-              ("-O0",        -- No opt
-               "-g",         -- Debug info
-               "-gnatwaCJ",  -- All warnings
-               "-gnatygO");  -- Style checks
+              ("-O0",                 -- No opt
+               "-g",                  -- Debug info
+               "-gnatwaCJ",           -- All warnings
+               "-gnatygO",            -- Style checks
+               "-fsanitize=address"); -- Address Sanitizer
 
          when "Release" =>
             for Default_Switches ("Ada") use
@@ -45,5 +46,16 @@ project AGTR is
 
       end case;
    end Compiler;
+
+   package Linker is
+      case Build is
+         when "Debug" =>
+            for Default_Switches ("Ada") use
+              ("-fsanitize=address"); -- Address Sanitizer
+
+         when "Release" =>
+            null;
+      end case;
+   end Linker;
 
 end AGTR;
