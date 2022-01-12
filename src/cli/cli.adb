@@ -28,7 +28,7 @@ package body Cli is
                elsif Full_Switch = "-dump-instr" then
                   Opt.Dump_Instructions := True;
                elsif Full_Switch = "-test" then
-                  Opt.test := True;
+                  Opt.Test := True;
                end if;
             when others =>
                exit;
@@ -63,7 +63,7 @@ package body Cli is
       Put_Line ("  --help              Display this information");
       Put_Line ("  --dump-instr        Dump the instructions");
    end Display_Help;
-   
+
    procedure Display_test is
    begin
       Put_Line ("Test");
