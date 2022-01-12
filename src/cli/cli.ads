@@ -2,7 +2,7 @@ with Misc;
 
 package Cli is
 
-   Option_Error : exception;
+   Argument_Error : exception;
 
    type Options is record
       Input_File        : Misc.String_Ptr := null;

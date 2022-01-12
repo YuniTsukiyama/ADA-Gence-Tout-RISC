@@ -6,6 +6,9 @@ package Misc is
    type String_Ptr is access String;
    --  String pointer
 
+   procedure Free_String_Ptr is new Ada.Unchecked_Deallocation
+      (Object => String, Name => String_Ptr);
+
    type Input_Ptr is access String;
    --  String pointer representing input
 

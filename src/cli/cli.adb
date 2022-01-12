@@ -1,5 +1,4 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Unchecked_Deallocation;
 
 with GNAT.Command_Line; use GNAT.Command_Line;
 
@@ -10,10 +9,8 @@ package body Cli is
    --------------
 
    procedure Finalize (Opt : in out Options) is
-      procedure Free is new Ada.Unchecked_Deallocation
-         (Object => String, Name => Misc.String_Ptr);
    begin
-      Free (Opt.Input_File);
+      Misc.Free_String_Ptr (Opt.Input_File);
    end Finalize;
 
    -------------------
@@ -36,6 +33,12 @@ package body Cli is
       end loop;
 
       Opt.Input_File := new String'(Get_Argument);
+
+      if Opt.Input_File.all = "" then
+         Finalize (Opt);
+         Put_Line (Standard_Error, "agtr: Missing input file");
+         Opt.Help := True;
+      end if;
    end Parse_Options;
 
    ------------------
