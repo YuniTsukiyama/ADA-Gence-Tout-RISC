@@ -36,7 +36,7 @@ package body Cli is
 
       if Opt.Input_File.all = "" then
          Finalize (Opt);
-         Put_Line (Standard_Error, "agtr: Missing input file");
+         Misc.Err ("missing input file");
          Opt.Help := True;
       end if;
    end Parse_Options;

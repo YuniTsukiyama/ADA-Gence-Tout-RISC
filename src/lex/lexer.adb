@@ -1,6 +1,5 @@
 with Ada.Characters.Handling; use Ada.Characters.Handling;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
-with Ada.Text_IO; use Ada.Text_IO;
 
 package body Lexer is
 
@@ -39,8 +38,7 @@ package body Lexer is
       return Tok;
    exception
       when Constraint_Error =>
-         Put_Line (Standard_Error, "bad register name `%"
-                                   & To_String (Reg_Name) & "`");
+         Misc.Err ("bad register name `%" & To_String (Reg_Name) & "`");
          return Self.Lex_Error;
    end Lex_Reg;
 
@@ -78,7 +76,7 @@ package body Lexer is
       return Tok;
    exception
       when Constraint_Error =>
-         Put_Line (Standard_Error, "missing or invalid immediate expression");
+         Misc.Err ("missing or invalid immediate expression");
          return Self.Lex_Error;
    end Lex_Imm;
 
@@ -202,8 +200,8 @@ package body Lexer is
       Tok := Self.Pop_Tok;
 
       if (Tok.Tok_Type /= Error) and then (Tok.Tok_Type /= Tok_Type) then
-         Put_Line (Standard_Error, "unexpected token `" & Tok.Tok_Type'Image
-                                   & "`, expected `" & Tok_Type'Image & "`");
+         Misc.Err ("unexpected token `" & Tok.Tok_Type'Image
+                   & "`, expected `" & Tok_Type'Image & "`");
          return Self.Lex_Error;
       end if;
 

@@ -21,4 +21,7 @@ package Misc is
    subtype Word is Unbounded_String;
    --  Word (can contain a mnemonic or a label)
 
+   procedure Err (Err_Message : String);
+   --  Display 'String' message on standard_Error prefixed by command name
+
 end Misc;
