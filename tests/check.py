@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from argparse import ArgumentParser
 from argparse import RawDescriptionHelpFormatter
 from pathlib import Path
@@ -53,21 +55,33 @@ def test(binary, test_case):
     binary = binary + test_case.get("options", [])
     res_comp = run_test(binary)
 
-    actu_stdout = str(res_comp.stdout, "utf-8")
-    expect_stdout = test_case.get("output", "")
+    checks = test_case.get("checks", [])
 
-    expected_return = test_case.get("return_code", "")
-
-    if (expected_return == ""):
-        assert res_comp.returncode == 0, \
-                f"return code not valid.\nExpected 0, got {res_comp.returncode}"
-    else:
-        assert res_comp.returncode == int(expected_return), \
-                f"return code not valid.\nExpected {expected_return}, got {res_comp.returncode}"
-
-    if (expected_return == ""):
+    if ("stdout" in checks):
+        actu_stdout = str(res_comp.stdout, "utf-8")
+        expect_stdout = test_case.get("output", "")
         assert actu_stdout == expect_stdout, \
-            f"Assembly badly assembled. Expected {expect_stdout}, got {actu_stdout}"
+                f"Assembly badly assembled. Expected '{expect_stdout}', got '{actu_stdout}'"
+
+    if ("has_stdout" in checks):
+        actu_stdout = str(res_comp.stdout, "utf-8")
+        assert actu_stdout != "", \
+                f"Assembly badly assembled. Expected something on stdout, got nothing"
+
+    if ("has_stderr" in checks):
+        actu_stderr = str(res_comp.stderr, "utf-8")
+        assert actu_stderr != "", \
+                f"Assembly badly assembled. Expected something on stderr, got nothing"
+
+    if ("returncode" in checks):
+        expected_return = test_case.get("return_code", "")
+
+        if (expected_return == ""):
+            assert res_comp.returncode == 0, \
+                    f"return code not valid.\nExpected 0, got {res_comp.returncode}"
+        else:
+            assert res_comp.returncode == int(expected_return), \
+                    f"return code not valid.\nExpected {expected_return}, got {res_comp.returncode}"
 
 
 def launch_one_test(binary, test_case):

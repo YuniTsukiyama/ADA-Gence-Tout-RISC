@@ -2,3 +2,13 @@
   output: "Test\n"
   options:
     - --test
+  checks:
+    - returncode
+    - stdout
+
+- name: Help
+  options:
+    - --help
+  checks:
+    - returncode
+    - has_stdout
