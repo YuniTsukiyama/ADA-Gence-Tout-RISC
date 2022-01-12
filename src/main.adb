@@ -21,6 +21,12 @@ begin
       Cli.Finalize (Opt);
       return;
    end if;
+   
+   if Opt.test then
+      Cli.Display_test;
+      Cli.Finalize (Opt);
+      return;
+   end if;
 
    Open (File, In_File, Opt.Input_File.all);
 

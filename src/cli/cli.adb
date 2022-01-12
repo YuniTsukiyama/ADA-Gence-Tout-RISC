@@ -20,13 +20,15 @@ package body Cli is
    procedure Parse_Options (Opt : out Options) is
    begin
       loop
-         case Getopt ("-help -dump-instr") is
+         case Getopt ("-help -dump-instr -test") is
             when '-'    =>
                if Full_Switch = "-help" then
                   Opt.Help := True;
                   return;
                elsif Full_Switch = "-dump-instr" then
                   Opt.Dump_Instructions := True;
+               elsif Full_Switch = "-test" then
+                  Opt.test := True;
                end if;
             when others =>
                exit;
@@ -61,5 +63,10 @@ package body Cli is
       Put_Line ("  --help              Display this information");
       Put_Line ("  --dump-instr        Dump the instructions");
    end Display_Help;
+   
+   procedure Display_test is
+   begin
+      Put_Line ("Test");
+   end Display_test;
 
 end Cli;

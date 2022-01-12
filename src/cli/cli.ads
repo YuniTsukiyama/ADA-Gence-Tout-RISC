@@ -8,6 +8,7 @@ package Cli is
       Input_File        : Misc.String_Ptr := null;
       Dump_Instructions : Boolean         := False;
       Help              : Boolean         := False;
+      test              : Boolean         := False;
    end record;
 
    procedure Finalize (Opt : in out Options);
@@ -19,4 +20,6 @@ package Cli is
    procedure Display_Help;
    --  Display help to stdout
 
+   procedure Display_test;
+   -- Just to test the testsuite
 end Cli;

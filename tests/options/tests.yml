@@ -1,0 +1,4 @@
+- name: Test
+  output: "Test\n"
+  options:
+    - --test
