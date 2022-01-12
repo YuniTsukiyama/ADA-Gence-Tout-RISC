@@ -3,3 +3,4 @@ obj_release/
 tags
 agtr
 .gdb_history
+tests/env
