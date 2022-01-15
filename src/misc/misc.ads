@@ -1,3 +1,4 @@
+with Ada.Command_Line; use Ada.Command_Line;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Unchecked_Deallocation;
 
@@ -21,7 +22,7 @@ package Misc is
    subtype Word is Unbounded_String;
    --  Word (can contain a mnemonic or a label)
 
-   procedure Err (Err_Message : String);
+   procedure Err (Err_Message : String; Err_Code : Exit_Status := Failure);
    --  Display 'String' message on standard_Error prefixed by command name
 
 end Misc;
