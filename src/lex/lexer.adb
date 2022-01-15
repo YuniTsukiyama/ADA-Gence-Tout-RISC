@@ -91,6 +91,17 @@ package body Lexer is
       return Tok;
    end Lex_Separator;
 
+   ---------------
+   -- Lex_Colon --
+   ---------------
+
+   function Lex_Colon (Self : in out Instance) return Token is
+      Tok : Token (Colon);
+   begin
+      Self.Pos := Self.Pos + 1;
+      return Tok;
+   end Lex_Colon;
+
    --------------
    -- Lex_Word --
    --------------
@@ -146,6 +157,7 @@ package body Lexer is
          when '%'        => return Self.Lex_Reg;
          when '$'        => return Self.Lex_Imm;
          when ','        => return Self.Lex_Separator;
+         when ':'        => return Self.Lex_Colon;
          when 'a' .. 'z' => return Self.Lex_Word;
          when others     => return Self.Lex_Error;
       end case;
@@ -161,6 +173,7 @@ package body Lexer is
       Self.Input    := Input;
       Self.Pos      := 1;
       Self.Curr_Tok := (others => <>);
+      Self.Next_Tok := (others => <>);
    end Initialize;
 
    --------------
@@ -222,13 +235,33 @@ package body Lexer is
       return Self.Curr_Tok;
    end Peek_Tok;
 
+   -------------------
+   -- Lookahead_Tok --
+   -------------------
+
+   function Lookahead_Tok (Self : in out Instance) return Token is
+   begin
+      if Self.Curr_Tok.Tok_Type = None
+      then
+         Self.Curr_Tok := Self.Lex_Tok;
+      end if;
+
+      if Self.Next_Tok.Tok_Type = None
+      then
+         Self.Next_Tok := Self.Lex_Tok;
+      end if;
+
+      return Self.Next_Tok;
+   end Lookahead_Tok;
+
    -----------------
    -- Discard_Tok --
    -----------------
 
    procedure Discard_Tok (Self : in out Instance) is
    begin
-      Self.Curr_Tok := (Tok_Type => None);
+      Self.Curr_Tok := Self.Next_Tok;
+      Self.Next_Tok := (Tok_Type => None);
    end Discard_Tok;
 
 end Lexer;

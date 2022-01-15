@@ -9,6 +9,7 @@ package Lexer is
                        Register,
                        Immediate,
                        Separator,
+                       Colon,
                        Newline,
                        Error,
                        None);
@@ -32,6 +33,7 @@ package Lexer is
       Input    : Misc.Input_Ptr;
       Pos      : Integer := 1;
       Curr_Tok : Token;
+      Next_Tok : Token;
    end record;
 
    procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
@@ -50,6 +52,9 @@ package Lexer is
    function Peek_Tok (Self : in out Instance) return Token;
    --  Peek a token
 
+   function Lookahead_Tok (Self : in out Instance) return Token;
+   --  Peek a token without discarding the current one
+
    procedure Discard_Tok (Self : in out Instance);
    --  Discard a token
 
@@ -64,6 +69,7 @@ private
    function Lex_Reg       (Self : in out Instance) return Token;
    function Lex_Imm       (Self : in out Instance) return Token;
    function Lex_Separator (Self : in out Instance) return Token;
+   function Lex_Colon     (Self : in out Instance) return Token;
    function Lex_Word      (Self : in out Instance) return Token;
    function Lex_Newline   (Self : Instance)        return Token;
    function Lex_Error     (Self : Instance)        return Token;
