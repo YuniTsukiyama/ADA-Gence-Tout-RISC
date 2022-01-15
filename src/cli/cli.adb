@@ -39,6 +39,14 @@ package body Cli is
          Misc.Err ("missing input file");
          Opt.Help := True;
       end if;
+
+   exception
+      when Invalid_Switch    =>
+         Opt.Help := True;
+         Misc.Err ("invalid option: " & Full_Switch);
+      when Invalid_Parameter =>
+         Opt.Help := True;
+         Misc.Err ("no parameter for:" & Full_Switch);
    end Parse_Options;
 
    ------------------
