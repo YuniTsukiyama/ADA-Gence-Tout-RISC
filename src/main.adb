@@ -24,12 +24,19 @@ begin
 
    --  Parse each instructions and build a list
    while not End_Of_File (File) loop
-      --  Get the next line
-      Parser_Inst.Initialize (new String'(Get_Line (File)));
+      declare
+         --  Get the next line
+         Curr_Line : constant String := Get_Line (File);
+      begin
+         --  If the line is not empty
+         if Curr_Line /= "" then
+            Parser_Inst.Initialize (new String'(Curr_Line));
 
-      --  Parse it
-      Parser_Inst.Parse (Curr_Instr);
-      Instrs.Append (Curr_Instr);
+            --  Parse it
+            Parser_Inst.Parse (Curr_Instr);
+            Instrs.Append (Curr_Instr);
+         end if;
+      end;
    end loop;
 
    while not Instrs.Is_Empty loop
