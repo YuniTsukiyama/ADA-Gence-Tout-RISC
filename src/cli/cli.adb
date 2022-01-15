@@ -24,6 +24,7 @@ package body Cli is
             when '-'    =>
                if Full_Switch = "-help" then
                   Opt.Help := True;
+                  return;
                elsif Full_Switch = "-dump-instr" then
                   Opt.Dump_Instructions := True;
                end if;
