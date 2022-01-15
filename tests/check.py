@@ -58,18 +58,18 @@ def test(binary, test_case):
     checks = test_case.get("checks", [])
 
     if ("stdout" in checks):
-        actu_stdout = str(res_comp.stdout, "utf-8")
-        expect_stdout = test_case.get("output", "")
+        actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
+        expect_stdout = test_case.get("output", "").strip('\n')
         assert actu_stdout == expect_stdout, \
                 f"Assembly badly assembled. Expected '{expect_stdout}', got '{actu_stdout}'"
 
     if ("has_stdout" in checks):
-        actu_stdout = str(res_comp.stdout, "utf-8")
+        actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
         assert actu_stdout != "", \
                 f"Assembly badly assembled. Expected something on stdout, got nothing"
 
     if ("has_stderr" in checks):
-        actu_stderr = str(res_comp.stderr, "utf-8")
+        actu_stderr = str(res_comp.stderr, "utf-8").strip('\n')
         assert actu_stderr != "", \
                 f"Assembly badly assembled. Expected something on stderr, got nothing"
 
