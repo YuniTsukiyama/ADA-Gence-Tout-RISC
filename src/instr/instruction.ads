@@ -34,4 +34,7 @@ package Instruction is
       (Element_Type => Instance);
    --  A list of instructions
 
+   procedure Free_Instr_List (Instrs : Instruction_List.List);
+   --  Iterate through the list to Finalize each instruction
+
 end Instruction;

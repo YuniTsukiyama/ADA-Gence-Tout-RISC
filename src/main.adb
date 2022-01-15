@@ -51,20 +51,23 @@ begin
       end;
    end loop;
 
-   while not Instrs.Is_Empty loop
-      Curr_Instr := Instrs.First_Element;
+   --  Iterate through instructions to dump or execute them
+   declare
+      Instr_Cursor : Instruction.Instruction_List.Cursor := Instrs.First;
+   begin
+      while Instruction.Instruction_List.Has_Element (Instr_Cursor) loop
+         Curr_Instr := Instruction.Instruction_List.Element (Instr_Cursor);
 
-      --  Display instruction if needed
-      if Opt.Dump_Instructions then
-         Curr_Instr.Dump;
-      end if;
+         --  Display instruction if needed
+         if Opt.Dump_Instructions then
+            Curr_Instr.Dump;
+         end if;
 
-      Curr_Instr.Finalize;
-      Instrs.Delete_First;
-
-   end loop;
+         Instruction.Instruction_List.Next (Instr_Cursor);
+      end loop;
+   end;
 
    --  Free various allocated objects
-   Instrs.Clear;
+   Instruction.Free_Instr_List (Instrs);
    Cli.Finalize (Opt);
 end Main;
