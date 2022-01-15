@@ -29,6 +29,7 @@ package body Cli is
                   Opt.Dump_Instructions := True;
                elsif Full_Switch = "-test" then
                   Opt.Test := True;
+                  return;
                end if;
             when others =>
                exit;
