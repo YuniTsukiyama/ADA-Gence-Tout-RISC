@@ -26,6 +26,24 @@ package body Parser is
       end case;
    end Parse_Operand;
 
+   ----------------
+   -- Initialize --
+   ----------------
+
+   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr) is
+   begin
+      Self.Lexer_Inst.Initialize (Input);
+   end Initialize;
+
+   --------------
+   -- Is_Label --
+   --------------
+
+   function Is_Label (Self : in out Instance) return Boolean is
+   begin
+      return Self.Lexer_Inst.Lookahead_Tok.Tok_Type = Lexer.Colon;
+   end Is_Label;
+
    -----------------------
    -- Parse_Instruction --
    -----------------------
@@ -69,24 +87,18 @@ package body Parser is
 
    end Parse_Instruction;
 
-   ----------------
-   -- Initialize --
-   ----------------
+   -----------------
+   -- Parse_Label --
+   -----------------
 
-   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr) is
+   procedure Parse_Label (Self       : in out Instance;
+                          Curr_Label : in out Label.Label) is
+      Curr_Tok : Lexer.Token;
    begin
-      Self.Lexer_Inst.Initialize (Input);
-   end Initialize;
+      Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Word);
+      Curr_Label.Label := Curr_Tok.Value;
 
-   -----------
-   -- Parse --
-   -----------
-
-   procedure Parse (Self  : in out Instance;
-                    Instr : out Instruction.Instance) is
-   begin
-      --  TODO: Handle labels
-      Self.Parse_Instruction (Instr);
-   end Parse;
+      Self.Lexer_Inst.Discard_Tok;
+   end Parse_Label;
 
 end Parser;

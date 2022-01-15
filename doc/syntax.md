@@ -14,7 +14,6 @@ main:
 
 - Labels are lowercase letters;
 - Labels are followed by a colon;
-- Labels are between 1 and 20 characters long;
 - Instructions are suffixed by a 4 spaces indentation;
 - Instruction mnemonics are lower case;
 - Registers reference are prefixed by a `%`;

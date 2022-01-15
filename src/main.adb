@@ -2,12 +2,14 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 with Cli;
 with Instruction;
+with Label;
 with Parser;
 
 procedure Main is
    Opt         : Cli.Options;
    File        : File_Type;
    Instrs      : Instruction.Instruction_List.List;
+   Labels      : Label.Label_List.List;
    Parser_Inst : Parser.Instance;
    Curr_Instr  : Instruction.Instance;
 begin
@@ -33,8 +35,18 @@ begin
             Parser_Inst.Initialize (new String'(Curr_Line));
 
             --  Parse it
-            Parser_Inst.Parse (Curr_Instr);
-            Instrs.Append (Curr_Instr);
+            if Parser_Inst.Is_Label then
+               declare
+                  Curr_Label : Label.Label :=
+                     (Address => Integer (Instrs.Length) + 1, others => <>);
+               begin
+                  Parser_Inst.Parse_Label (Curr_Label);
+                  Labels.Append (Curr_Label);
+               end;
+            else
+               Parser_Inst.Parse_Instruction (Curr_Instr);
+               Instrs.Append (Curr_Instr);
+            end if;
          end if;
       end;
    end loop;
