@@ -3,21 +3,22 @@ with Misc;
 
 package Operand is
 
-   type Operand_Type is (Register,
-                         Immediate,
-                         Label,
-                         Error,
-                         None);
+   type Operand_Type is (Op_Register,
+                         Op_Immediate,
+                         Op_Label,
+                         Op_Error,
+                         Op_None);
    --  Defines each operand type
 
    type Instance (Op_Type : Operand_Type) is tagged record
       case Op_Type is
-         when Register =>
+         when Op_Register =>
             Reg : Cpu.Register;
-         when Immediate =>
+         when Op_Immediate =>
             Imm : Misc.Imm8;
-         when Label =>
-            Label : Misc.Word;
+         when Op_Label =>
+            Label         : Misc.Word;
+            Label_Address : Integer;
          when others =>
             null;
       end case;

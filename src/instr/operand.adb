@@ -10,11 +10,11 @@ package body Operand is
    procedure Dump (Self : Instance) is
    begin
       case Self.Op_Type is
-         when Operand.Register =>
+         when Operand.Op_Register =>
             Put_Line ("Operand (register): %" & Self.Reg'Image);
-         when Operand.Immediate =>
+         when Operand.Op_Immediate =>
             Put_Line ("Operand (immediate): $" & Self.Imm'Image);
-         when Operand.Label =>
+         when Operand.Op_Label =>
             Put_Line ("Operand (immediate): $" & To_String (Self.Label));
          when others =>
             null;

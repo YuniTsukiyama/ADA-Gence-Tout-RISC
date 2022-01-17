@@ -16,13 +16,15 @@ package body Parser is
 
       case Curr_Tok.Tok_Type is
          when Lexer.Register  =>
-            return (Op_Type => Operand.Register, Reg => Curr_Tok.Register);
+            return (Op_Type => Operand.Op_Register, Reg => Curr_Tok.Register);
          when Lexer.Immediate =>
-            return (Op_Type => Operand.Immediate, Imm => Curr_Tok.Immediate);
+            return (Op_Type => Operand.Op_Immediate,
+                    Imm => Curr_Tok.Immediate);
          when Lexer.Word      =>
-            return (Op_Type => Operand.Label, Label => Curr_Tok.Value);
+            return (Op_Type => Operand.Op_Label, Label => Curr_Tok.Value,
+                    Label_Address => -1);
          when others          =>
-            return (Op_Type => Operand.Error);
+            return (Op_Type => Operand.Op_Error);
       end case;
    end Parse_Operand;
 
