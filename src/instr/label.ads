@@ -4,7 +4,7 @@ with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 package Label is
 
    type Label is record
-      Label   : Unbounded_String;
+      Symbol  : Unbounded_String;
       Address : Integer;
    end record;
 

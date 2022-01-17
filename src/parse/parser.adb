@@ -101,7 +101,7 @@ package body Parser is
       Curr_Tok : Lexer.Token;
    begin
       Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Word);
-      Curr_Label.Label := Curr_Tok.Value;
+      Curr_Label.Symbol := Curr_Tok.Value;
 
       Self.Lexer_Inst.Discard_Tok;
    end Parse_Label;
