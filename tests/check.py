@@ -98,22 +98,21 @@ def launch_one_test(binary, test_case):
 
 def launch_tests(binary):
     passed, failed = 0, 0
-    test = ""
 
     for test_file in Path(os.path.dirname(__file__)).rglob('tests.yml'):
-        test = test_file
 
-    with open(test, "r") as fichier:
-        print(f" {test} ".center(80, '-') + "\n")
-        for test_case in yaml.safe_load(fichier):
-            if (launch_one_test(binary, test_case)):
-                passed += 1
-            else:
-                failed += 1
+        with open(test_file, "r") as fichier:
+            print(f" {test_file} ".center(80, '-') + "\n")
+            for test_case in yaml.safe_load(fichier):
+                if (launch_one_test(binary, test_case)):
+                    passed += 1
+                else:
+                    failed += 1
+        print()
 
-        print("\n" + " GLOBAL SYNTHESIS ".center(80, "-"))
-        print_synthesis(passed, failed)
-        print("".center(80, "-") + "\n")
+    print("\n" + " GLOBAL SYNTHESIS ".center(80, "-"))
+    print_synthesis(passed, failed)
+    print("".center(80, "-") + "\n")
 
 
 if __name__ == "__main__":
