@@ -51,6 +51,19 @@ begin
       end;
    end loop;
 
+   --  Expand instruction's labels
+   declare
+      Instr_Cursor : Instruction.Instruction_List.Cursor := Instrs.First;
+   begin
+      while Instruction.Instruction_List.Has_Element (Instr_Cursor) loop
+         Curr_Instr := Instruction.Instruction_List.Element (Instr_Cursor);
+
+         Curr_Instr.Expand_Label (Labels);
+
+         Instruction.Instruction_List.Next (Instr_Cursor);
+      end loop;
+   end;
+
    --  Iterate through instructions to dump or execute them
    declare
       Instr_Cursor : Instruction.Instruction_List.Cursor := Instrs.First;

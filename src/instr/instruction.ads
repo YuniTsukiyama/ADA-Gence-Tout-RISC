@@ -1,5 +1,6 @@
 with Ada.Containers.Doubly_Linked_Lists;
 
+with Label;
 with Operand;
 
 package Instruction is
@@ -29,6 +30,10 @@ package Instruction is
 
    procedure Dump (Self : in out Instance);
    --  Dump an Instruction instance
+
+   procedure Expand_Label (Self   : in out Instance;
+                           Labels : Label.Label_List.List);
+   --  Expand instruction's labels to its address
 
    package Instruction_List is new Ada.Containers.Doubly_Linked_Lists
       (Element_Type => Instance);

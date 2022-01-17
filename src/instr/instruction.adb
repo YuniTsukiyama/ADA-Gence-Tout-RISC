@@ -43,6 +43,24 @@ package body Instruction is
 
    end Dump;
 
+   ------------------
+   -- Expand_Label --
+   ------------------
+
+   procedure Expand_Label (Self   : in out Instance;
+                           Labels : Label.Label_List.List) is
+      use Operand;
+   begin
+      --  Expand each operand
+      if Self.Left /= null then
+         Self.Left.Expand_Label (Labels);
+      end if;
+
+      if Self.Right /= null then
+         Self.Right.Expand_Label (Labels);
+      end if;
+   end Expand_Label;
+
    ---------------------
    -- Free_Instr_List --
    ---------------------
