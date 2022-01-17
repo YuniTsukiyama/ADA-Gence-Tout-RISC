@@ -10,9 +10,16 @@ package body Instruction is
    procedure Finalize (Self : in out Instance) is
       procedure Free is new Ada.Unchecked_Deallocation
          (Object => Operand.Instance, Name => Operand.Operand_Ptr);
+      use Operand;
    begin
-      Free (Self.Left);
-      Free (Self.Right);
+
+      if Self.Left /= null then
+         Free (Self.Left);
+      end if;
+
+      if Self.Right /= null then
+         Free (Self.Right);
+      end if;
    end Finalize;
 
    ----------
@@ -20,14 +27,19 @@ package body Instruction is
    ----------
 
    procedure Dump (Self : in out Instance) is
+      use Operand;
    begin
       Put_Line ("Mnemonic: " & Self.Operation'Image);
 
-      Put ("Left  ");
-      Self.Left.Dump;
+      if Self.Left /= null then
+         Put ("Left  ");
+         Self.Left.Dump;
+      end if;
 
-      Put ("Right ");
-      Self.Right.Dump;
+      if Self.Right /= null then
+         Put ("Right ");
+         Self.Right.Dump;
+      end if;
 
    end Dump;
 

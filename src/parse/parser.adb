@@ -61,6 +61,8 @@ package body Parser is
       Curr_Tok := Self.Lexer_Inst.Peek_Tok;
       if Curr_Tok.Tok_Type = Lexer.Newline
       then
+         Instr.Left  := null;
+         Instr.Right := null;
          return;
       end if;
 
@@ -71,6 +73,7 @@ package body Parser is
       Curr_Tok := Self.Lexer_Inst.Peek_Tok;
       if Curr_Tok.Tok_Type = Lexer.Newline
       then
+         Instr.Right := null;
          return;
       end if;
 
