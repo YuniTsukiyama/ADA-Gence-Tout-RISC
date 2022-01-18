@@ -3,13 +3,11 @@
 from argparse import ArgumentParser
 from argparse import RawDescriptionHelpFormatter
 from pathlib import Path
-from difflib import unified_diff as diff
+from difflib import unified_diff
 from termcolor import colored
 import yaml
 import os
 import subprocess
-import fnmatch
-import difflib
 
 
 DESCRIPTION = """Testsuite pour le projet d'ADA.
@@ -50,6 +48,14 @@ def run_test(args, timeout=3):
     return res
 
 
+def diff(expected, actual):
+    expected = expected.splitlines(keepends=True)
+    actual = actual.splitlines(keepends=True)
+
+    return ''.join(unified_diff(expected, actual,
+                                fromfile="expected", tofile="actual"))
+
+
 def test(binary, test_case, test_dir):
     binary = [binary]
     binary = binary + test_case.get("options", [])
@@ -59,16 +65,16 @@ def test(binary, test_case, test_dir):
 
     if ("stdout" in checks):
         actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
-        stdout_file = test_case.get("output_file", "")
+        stdout_file = test_case.get("stdout_file", "")
         if (stdout_file == ""):
-            expect_stdout = test_case.get("output", "").strip('\n')
+            expect_stdout = test_case.get("stdout", "").strip('\n')
             assert actu_stdout == expect_stdout, \
-                    f"Assembly badly assembled. Expected '{expect_stdout}', got '{actu_stdout}'"
+                    f"stdout differs:\n{diff(expect_stdout, actu_stdout)}"
         else:
             with open(test_dir / stdout_file, "r") as fichier:
-                expect_stdout = fichier.read()
+                expect_stdout = fichier.read().strip('\n')
                 assert actu_stdout == expect_stdout, \
-                        f"Assembly badly assembled. Expected '{expect_stdout}', got '{actu_stdout}'"
+                    f"stdout differs:\n{diff(expect_stdout, actu_stdout)}"
 
     if ("has_stdout" in checks):
         actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
@@ -96,7 +102,7 @@ def launch_one_test(binary, test_case, test_dir):
         test(binary, test_case, test_dir)
     except AssertionError as err:
         print(f"[{colored('KO', 'red')}]", test_case.get("name"))
-        print(f"{err}")
+        print(f"{err}\n")
         return 0
 
     print(f"[{colored('OK', 'green')}]", test_case.get("name"))

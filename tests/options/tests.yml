@@ -1,5 +1,5 @@
 - name: Test
-  output: "Test\n"
+  stdout: "Test\n"
   options:
     - --test
   checks:
@@ -12,3 +12,11 @@
   checks:
     - returncode
     - has_stdout
+
+- name: Invalid option
+  options:
+    - --invalid-option
+  return_code: 1
+  checks:
+    - returncode
+    - has_stderr
