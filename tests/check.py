@@ -76,6 +76,19 @@ def test(binary, test_case, test_dir):
                 assert actu_stdout == expect_stdout, \
                     f"stdout differs:\n{diff(expect_stdout, actu_stdout)}"
 
+    if ("stderr" in checks):
+        actu_stderr = str(res_comp.stderr, "utf-8").strip('\n')
+        stderr_file = test_case.get("stderr_file", "")
+        if (stderr_file == ""):
+            expect_stderr = test_case.get("stderr", "").strip('\n')
+            assert actu_stderr == expect_stderr, \
+                    f"stderr differs:\n{diff(expect_stderr, actu_stderr)}"
+        else:
+            with open(test_dir / stderr_file, "r") as fichier:
+                expect_stderr = fichier.read().strip('\n')
+                assert actu_stderr == expect_stderr, \
+                    f"stderr differs:\n{diff(expect_stderr, actu_stderr)}"
+
     if ("has_stdout" in checks):
         actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
         assert actu_stdout != "", \
