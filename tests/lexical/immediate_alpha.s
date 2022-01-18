@@ -1,0 +1,2 @@
+main:
+    mov %A, $B

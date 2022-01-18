@@ -1,0 +1,55 @@
+- name: Immediate Alpha
+  options:
+    - tests/lexical/immediate_alpha.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Bad Register
+  options:
+    - tests/lexical/bad_register.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Missing Immediate
+  options:
+    - tests/lexical/missing_immediate.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Missing Register
+  options:
+    - tests/lexical/missing_register.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Invalid Mnemonic
+  options:
+    - tests/lexical/invalid_mnemonic.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Immediate Out Of Range - Low
+  options:
+    - tests/lexical/immediate_out_of_range_low.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Immediate Out Of Range - High
+  options:
+    - tests/lexical/immediate_out_of_range_high.s
+  checks:
+    - returncode
+    - stdout
+    - stderr

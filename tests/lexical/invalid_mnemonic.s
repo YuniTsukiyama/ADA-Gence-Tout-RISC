@@ -1,0 +1,2 @@
+main:
+    invalidmnemonic %B

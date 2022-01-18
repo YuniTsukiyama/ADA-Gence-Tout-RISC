@@ -1,0 +1,103 @@
+- name: Missing Mnemonic
+  options:
+    - tests/syntax/missing_mnemonic.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Missing Operand - One
+  options:
+    - tests/syntax/missing_operand_one.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Missing Operand - Two
+  options:
+    - tests/syntax/missing_operand_two.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Missing Operand - Three
+  options:
+    - tests/syntax/missing_operand_three.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Three Operands - One
+  options:
+    - tests/syntax/three_operands_one.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Three Operands - Two
+  options:
+    - tests/syntax/three_operands_two.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Too Many Operands
+  options:
+    - tests/syntax/too_many_operands.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: No Separator
+  options:
+    - tests/syntax/no_separator.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Separator - No Operand Before
+  options:
+    - tests/syntax/separator_no_operand_before.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Separator - No Operand After
+  options:
+    - tests/syntax/separator_no_operand_after.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Two Separators
+  options:
+    - tests/syntax/two_separators.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Label No Colon
+  options:
+    - tests/syntax/label_no_colon.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Colon First
+  options:
+    - tests/syntax/colon_first.s
+  checks:
+    - returncode
+    - stdout
+    - stderr

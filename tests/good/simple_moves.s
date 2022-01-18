@@ -1,3 +1,4 @@
+main:
     mov %A, $42
     mov %C, $120
     mov %R, $0

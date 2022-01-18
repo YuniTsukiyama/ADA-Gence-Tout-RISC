@@ -1,0 +1,129 @@
+- name: Simple Move Dump
+  stdout_file: simple_move_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_move.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Simple Moves Dump
+  stdout_file: simple_moves_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_moves.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Load Store Dump
+  stdout_file: load_store_dump.out
+  options:
+    - --dump-instr
+    - tests/good/load_store.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Newlines Dump
+  stdout_file: newlines_dump.out
+  options:
+    - --dump-instr
+    - tests/good/newlines.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Push Pop Dump
+  stdout_file: push_pop_dump.out
+  options:
+    - --dump-instr
+    - tests/good/push_pop.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Simple Adds Dump
+  stdout_file: simple_adds_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_adds.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Simple Ands Dump
+  stdout_file: simple_ands_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_ands.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Simple Cmps Dump
+  stdout_file: simple_cmps_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_cmps.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Simple Nors Dump
+  stdout_file: simple_nors_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_nors.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Simple Ors Dump
+  stdout_file: simple_ors_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_ors.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Simple Subs Dump
+  stdout_file: simple_subs_dump.out
+  options:
+    - --dump-instr
+    - tests/good/simple_subs.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Immediate Min Dump
+  stdout_file: immediate_min_dump.out
+  options:
+    - --dump-instr
+    - tests/good/immediate_min.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Immediate Max Dump
+  stdout_file: immediate_max_dump.out
+  options:
+    - --dump-instr
+    - tests/good/immediate_max.s
+  checks:
+    - returncode
+    - stdout
+    - stderr

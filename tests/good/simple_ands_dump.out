@@ -1,0 +1,12 @@
+Mnemonic: OP_AND
+Left  Operand (register): %C
+Right Operand (immediate): $ 8
+Mnemonic: OP_AND
+Left  Operand (register): %A
+Right Operand (immediate): $-2
+Mnemonic: OP_AND
+Left  Operand (register): %A
+Right Operand (register): %B
+Mnemonic: OP_AND
+Left  Operand (register): %R
+Right Operand (register): %C

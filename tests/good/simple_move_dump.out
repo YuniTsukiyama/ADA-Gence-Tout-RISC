@@ -1,0 +1,3 @@
+Mnemonic: OP_MOV
+Left  Operand (register): %C
+Right Operand (immediate): $-8

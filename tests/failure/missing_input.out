@@ -1,0 +1,4 @@
+Usage: agtr [options] file...
+Options:
+  --help              Display this information
+  --dump-instr        Dump the instructions

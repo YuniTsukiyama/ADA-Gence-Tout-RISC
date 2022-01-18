@@ -1,0 +1,2 @@
+main:
+    push %A, %B

@@ -1,0 +1,3 @@
+Mnemonic: OP_MOV
+Left  Operand (register): %A
+Right Operand (immediate): $ 127
