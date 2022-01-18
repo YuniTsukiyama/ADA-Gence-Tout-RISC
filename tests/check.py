@@ -50,7 +50,7 @@ def run_test(args, timeout=3):
     return res
 
 
-def test(binary, test_case):
+def test(binary, test_case, test_dir):
     binary = [binary]
     binary = binary + test_case.get("options", [])
     res_comp = run_test(binary)
@@ -59,9 +59,16 @@ def test(binary, test_case):
 
     if ("stdout" in checks):
         actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
-        expect_stdout = test_case.get("output", "").strip('\n')
-        assert actu_stdout == expect_stdout, \
-                f"Assembly badly assembled. Expected '{expect_stdout}', got '{actu_stdout}'"
+        stdout_file = test_case.get("output_file", "")
+        if (stdout_file == ""):
+            expect_stdout = test_case.get("output", "").strip('\n')
+            assert actu_stdout == expect_stdout, \
+                    f"Assembly badly assembled. Expected '{expect_stdout}', got '{actu_stdout}'"
+        else:
+            with open(test_dir / stdout_file, "r") as fichier:
+                expect_stdout = fichier.read()
+                assert actu_stdout == expect_stdout, \
+                        f"Assembly badly assembled. Expected '{expect_stdout}', got '{actu_stdout}'"
 
     if ("has_stdout" in checks):
         actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
@@ -84,9 +91,9 @@ def test(binary, test_case):
                     f"return code not valid.\nExpected {expected_return}, got {res_comp.returncode}"
 
 
-def launch_one_test(binary, test_case):
+def launch_one_test(binary, test_case, test_dir):
     try:
-        test(binary, test_case)
+        test(binary, test_case, test_dir)
     except AssertionError as err:
         print(f"[{colored('KO', 'red')}]", test_case.get("name"))
         print(f"{err}")
@@ -101,10 +108,12 @@ def launch_tests(binary):
 
     for test_file in Path(os.path.dirname(__file__)).rglob('tests.yml'):
 
+        test_dir = test_file.parents[0]
+
         with open(test_file, "r") as fichier:
             print(f" {test_file} ".center(80, '-') + "\n")
             for test_case in yaml.safe_load(fichier):
-                if (launch_one_test(binary, test_case)):
+                if (launch_one_test(binary, test_case, test_dir)):
                     passed += 1
                 else:
                     failed += 1
