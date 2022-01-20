@@ -32,3 +32,48 @@
     - returncode
     - stdout
     - has_stderr
+
+- name: Missing Operand - One
+  options:
+    - tests/failure/missing_operand_one.s
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - has_stderr
+
+- name: Missing Operand - Two
+  options:
+    - tests/failure/missing_operand_two.s
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - has_stderr
+
+- name: Missing Operand - Three
+  options:
+    - tests/failure/missing_operand_three.s
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - has_stderr
+
+- name: Too Many Operands
+  options:
+    - tests/failure/too_many_operands.s
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - has_stderr
+
+- name: Invalid Mnemonic
+  options:
+    - tests/failure/invalid_mnemonic.s
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - has_stderr

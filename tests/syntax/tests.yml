@@ -7,33 +7,6 @@
     - stdout
     - has_stderr
 
-- name: Missing Operand - One
-  options:
-    - tests/syntax/missing_operand_one.s
-  return_code: 1
-  checks:
-    - returncode
-    - stdout
-    - has_stderr
-
-- name: Missing Operand - Two
-  options:
-    - tests/syntax/missing_operand_two.s
-  return_code: 1
-  checks:
-    - returncode
-    - stdout
-    - has_stderr
-
-- name: Missing Operand - Three
-  options:
-    - tests/syntax/missing_operand_three.s
-  return_code: 1
-  checks:
-    - returncode
-    - stdout
-    - has_stderr
-
 - name: Three Operands - One
   options:
     - tests/syntax/three_operands_one.s
@@ -46,15 +19,6 @@
 - name: Three Operands - Two
   options:
     - tests/syntax/three_operands_two.s
-  return_code: 1
-  checks:
-    - returncode
-    - stdout
-    - has_stderr
-
-- name: Too Many Operands
-  options:
-    - tests/syntax/too_many_operands.s
   return_code: 1
   checks:
     - returncode

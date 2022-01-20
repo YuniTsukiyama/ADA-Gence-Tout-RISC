@@ -34,15 +34,6 @@
     - stdout
     - has_stderr
 
-- name: Invalid Mnemonic
-  options:
-    - tests/lexical/invalid_mnemonic.s
-  return_code: 1
-  checks:
-    - returncode
-    - stdout
-    - has_stderr
-
 - name: Immediate Out Of Range - Low
   options:
     - tests/lexical/immediate_out_of_range_low.s
