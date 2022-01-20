@@ -95,6 +95,10 @@ package body Parser is
       when Parsing_Error =>
          Instr.Finalize;
          raise Parsing_Error;
+      when Constraint_Error =>
+         Misc.Err ("no such instruction: `"
+                   & To_String (Curr_Tok.Value) & "'");
+         raise Parsing_Error;
       when Lexer.Lexing_Error =>
          Instr.Finalize;
          raise Lexer.Lexing_Error;
