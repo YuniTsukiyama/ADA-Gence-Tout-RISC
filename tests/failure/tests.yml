@@ -5,7 +5,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Undefined label
   options:
@@ -14,7 +14,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Missing Input File
   stdout_file: missing_input.out
@@ -22,7 +22,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Non Existing Input File
   options:
@@ -31,4 +31,4 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr

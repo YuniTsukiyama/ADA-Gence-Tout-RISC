@@ -14,7 +14,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Missing Operand - Two
   options:
@@ -23,7 +23,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Missing Operand - Three
   options:
@@ -32,7 +32,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Three Operands - One
   options:
@@ -41,7 +41,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Three Operands - Two
   options:
@@ -50,7 +50,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Too Many Operands
   options:
@@ -59,7 +59,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: No Separator
   options:
@@ -68,7 +68,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Separator - No Operand Before
   options:
@@ -77,7 +77,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Separator - No Operand After
   options:
@@ -86,7 +86,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Two Separators
   options:
@@ -95,7 +95,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Label No Colon
   options:
@@ -104,7 +104,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Colon First
   options:
@@ -113,4 +113,4 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr

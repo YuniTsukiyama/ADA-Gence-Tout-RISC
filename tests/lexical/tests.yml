@@ -5,7 +5,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Bad Register
   options:
@@ -14,7 +14,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Missing Immediate
   options:
@@ -23,7 +23,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Missing Register
   options:
@@ -32,7 +32,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Invalid Mnemonic
   options:
@@ -41,7 +41,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Immediate Out Of Range - Low
   options:
@@ -50,7 +50,7 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Immediate Out Of Range - High
   options:
@@ -59,4 +59,4 @@
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
