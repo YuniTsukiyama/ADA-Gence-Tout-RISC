@@ -1,6 +1,7 @@
 - name: Missing main label
   options:
     - tests/failure/missing_main.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -9,6 +10,7 @@
 - name: Undefined label
   options:
     - tests/failure/undefined_label.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -16,6 +18,7 @@
 
 - name: Missing Input File
   stdout_file: missing_input.out
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -24,6 +27,7 @@
 - name: Non Existing Input File
   options:
     - non_existing_input_file.s
+  return_code: 1
   checks:
     - returncode
     - stdout

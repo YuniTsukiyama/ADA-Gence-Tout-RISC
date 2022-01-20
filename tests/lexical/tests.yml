@@ -1,6 +1,7 @@
 - name: Immediate Alpha
   options:
     - tests/lexical/immediate_alpha.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -9,6 +10,7 @@
 - name: Bad Register
   options:
     - tests/lexical/bad_register.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -17,6 +19,7 @@
 - name: Missing Immediate
   options:
     - tests/lexical/missing_immediate.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -25,6 +28,7 @@
 - name: Missing Register
   options:
     - tests/lexical/missing_register.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -33,6 +37,7 @@
 - name: Invalid Mnemonic
   options:
     - tests/lexical/invalid_mnemonic.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -41,6 +46,7 @@
 - name: Immediate Out Of Range - Low
   options:
     - tests/lexical/immediate_out_of_range_low.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -49,6 +55,7 @@
 - name: Immediate Out Of Range - High
   options:
     - tests/lexical/immediate_out_of_range_high.s
+  return_code: 1
   checks:
     - returncode
     - stdout

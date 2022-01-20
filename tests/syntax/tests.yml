@@ -1,14 +1,16 @@
 - name: Missing Mnemonic
   options:
     - tests/syntax/missing_mnemonic.s
+  return_code: 1
   checks:
     - returncode
     - stdout
-    - stderr
+    - has_stderr
 
 - name: Missing Operand - One
   options:
     - tests/syntax/missing_operand_one.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -17,6 +19,7 @@
 - name: Missing Operand - Two
   options:
     - tests/syntax/missing_operand_two.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -25,6 +28,7 @@
 - name: Missing Operand - Three
   options:
     - tests/syntax/missing_operand_three.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -33,6 +37,7 @@
 - name: Three Operands - One
   options:
     - tests/syntax/three_operands_one.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -41,6 +46,7 @@
 - name: Three Operands - Two
   options:
     - tests/syntax/three_operands_two.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -49,6 +55,7 @@
 - name: Too Many Operands
   options:
     - tests/syntax/too_many_operands.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -57,6 +64,7 @@
 - name: No Separator
   options:
     - tests/syntax/no_separator.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -65,6 +73,7 @@
 - name: Separator - No Operand Before
   options:
     - tests/syntax/separator_no_operand_before.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -73,6 +82,7 @@
 - name: Separator - No Operand After
   options:
     - tests/syntax/separator_no_operand_after.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -81,6 +91,7 @@
 - name: Two Separators
   options:
     - tests/syntax/two_separators.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -89,6 +100,7 @@
 - name: Label No Colon
   options:
     - tests/syntax/label_no_colon.s
+  return_code: 1
   checks:
     - returncode
     - stdout
@@ -97,6 +109,7 @@
 - name: Colon First
   options:
     - tests/syntax/colon_first.s
+  return_code: 1
   checks:
     - returncode
     - stdout
