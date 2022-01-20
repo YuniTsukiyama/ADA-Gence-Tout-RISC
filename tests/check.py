@@ -122,23 +122,24 @@ def launch_one_test(binary, test_case, test_dir):
     return 1 
 
 
-def launch_tests(binary):
+def launch_tests(binary, categories):
     passed, failed = 0, 0
 
     for test_file in Path(os.path.dirname(__file__)).rglob('tests.yml'):
 
         test_dir = test_file.parents[0]
 
-        with open(test_file, "r") as fichier:
-            print(f" {test_file} ".center(80, '-') + "\n")
-            for test_case in yaml.safe_load(fichier):
-                if (launch_one_test(binary, test_case, test_dir)):
-                    passed += 1
-                else:
-                    failed += 1
-        print()
+        if (categories == []) or (test_dir.name in categories):
+            with open(test_file, "r") as fichier:
+                print(f" {test_dir.name} ".center(80, '-') + "\n")
+                for test_case in yaml.safe_load(fichier):
+                    if (launch_one_test(binary, test_case, test_dir)):
+                        passed += 1
+                    else:
+                        failed += 1
+            print()
 
-    print("\n" + " GLOBAL SYNTHESIS ".center(80, "-"))
+    print(" GLOBAL SYNTHESIS ".center(80, "-"))
     print_synthesis(passed, failed)
     print("".center(80, "-") + "\n")
 
@@ -147,6 +148,8 @@ if __name__ == "__main__":
     parser = ArgumentParser(description = DESCRIPTION, formatter_class = RawDescriptionHelpFormatter,
             epilog = EPILOG)
     parser.add_argument("bin", metavar="BINARY")
+    parser.add_argument('-c', '--categories', metavar='CATEGORIES',
+                        action='append', nargs='+', default=[])
     args = parser.parse_args()
     binary = Path(args.bin).absolute()
-    launch_tests(binary)
+    launch_tests(binary, args.categories[0] if args.categories != [] else [])
