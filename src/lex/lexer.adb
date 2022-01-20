@@ -1,6 +1,8 @@
 with Ada.Characters.Handling; use Ada.Characters.Handling;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 
+with Parser;
+
 package body Lexer is
 
    ---------------
@@ -215,7 +217,7 @@ package body Lexer is
       if (Tok.Tok_Type /= Error) and then (Tok.Tok_Type /= Tok_Type) then
          Misc.Err ("unexpected token `" & Tok.Tok_Type'Image
                    & "`, expected `" & Tok_Type'Image & "`");
-         return Self.Lex_Error;
+         raise Parser.Parsing_Error;
       end if;
 
       return Tok;

@@ -5,6 +5,8 @@ with Misc;
 
 package Lexer is
 
+   Lexing_Error : exception;
+
    type Token_Type is (Word,
                        Register,
                        Immediate,

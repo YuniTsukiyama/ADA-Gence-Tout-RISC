@@ -89,4 +89,8 @@ begin
    --  Free various allocated objects
    Instruction.Free_Instr_List (Instrs);
    Cli.Finalize (Opt);
+
+exception
+   when others =>
+      Cli.Finalize (Opt);
 end Main;

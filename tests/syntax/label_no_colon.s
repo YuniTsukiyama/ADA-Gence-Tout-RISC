@@ -1,2 +1,0 @@
-main
-    mov %A, %B

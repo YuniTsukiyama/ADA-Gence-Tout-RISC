@@ -24,7 +24,8 @@ package body Parser is
             return (Op_Type => Operand.Op_Label, Label => Curr_Tok.Value,
                     Label_Address => -1);
          when others          =>
-            return (Op_Type => Operand.Op_Error);
+            Misc.Err ("expecting operand after `,`; got nothing");
+            raise Parsing_Error;
       end case;
    end Parse_Operand;
 
@@ -89,6 +90,14 @@ package body Parser is
       Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Newline);
 
       return;
+
+   exception
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
 
    end Parse_Instruction;
 

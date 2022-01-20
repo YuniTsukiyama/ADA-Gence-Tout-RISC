@@ -61,15 +61,6 @@
     - stdout
     - has_stderr
 
-- name: Label No Colon
-  options:
-    - tests/syntax/label_no_colon.s
-  return_code: 1
-  checks:
-    - returncode
-    - stdout
-    - has_stderr
-
 - name: Colon First
   options:
     - tests/syntax/colon_first.s

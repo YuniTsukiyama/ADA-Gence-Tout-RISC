@@ -6,6 +6,8 @@ with Operand;
 
 package Parser is
 
+   Parsing_Error : exception;
+
    type Instance is tagged record
       Lexer_Inst : Lexer.Instance;
    end record;
