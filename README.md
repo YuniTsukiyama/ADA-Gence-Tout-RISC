@@ -23,8 +23,14 @@ mkdir obj_debug
 gprbuild -XBuild=Debug
 ```
 
+## Testsuite
+
+```
+./tests/check.py agtr
+```
+
 ## Project content
 
-doc/        Documentation
-src/        Source Code
-tests/      Testsuite
+- doc/        Documentation
+- src/        Source Code
+- tests/      Testsuite
