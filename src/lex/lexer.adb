@@ -41,7 +41,7 @@ package body Lexer is
    exception
       when Constraint_Error =>
          Misc.Err ("bad register name `%" & To_String (Reg_Name) & "`");
-         return Self.Lex_Error;
+         raise Lexing_Error;
    end Lex_Reg;
 
    -------------
@@ -61,6 +61,12 @@ package body Lexer is
          Self.Pos := Self.Pos + 1;
       end if;
 
+      if (Self.Pos > Self.Input'Last)
+         or not Is_Digit (Self.Input (Self.Pos))
+      then
+         raise Lexing_Error;
+      end if;
+
       Tok.Immediate := 0;
       while (Self.Pos <= Self.Input'Last)
          and then (Is_Digit (Self.Input (Self.Pos)))
@@ -77,9 +83,9 @@ package body Lexer is
 
       return Tok;
    exception
-      when Constraint_Error =>
+      when others =>
          Misc.Err ("missing or invalid immediate expression");
-         return Self.Lex_Error;
+         raise Lexing_Error;
    end Lex_Imm;
 
    -------------------
@@ -161,7 +167,7 @@ package body Lexer is
          when ','        => return Self.Lex_Separator;
          when ':'        => return Self.Lex_Colon;
          when 'a' .. 'z' => return Self.Lex_Word;
-         when others     => return Self.Lex_Error;
+         when others     => raise Lexing_Error;
       end case;
    end Lex_Tok;
 
