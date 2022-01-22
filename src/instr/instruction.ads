@@ -1,4 +1,3 @@
-with Ada.Containers.Doubly_Linked_Lists;
 with Ada.Unchecked_Deallocation;
 
 with Label;
@@ -41,12 +40,5 @@ package Instruction is
    procedure Free_Instr_Ptr is new Ada.Unchecked_Deallocation
       (Object => Instance, Name => Instr_Ptr);
    --  Deallocate an Instance of Instruction
-
-   package Instruction_List is new Ada.Containers.Doubly_Linked_Lists
-      (Element_Type => Instr_Ptr);
-   --  A list of instructions
-
-   procedure Free_Instr_List (Instrs : Instruction_List.List);
-   --  Iterate through the list to Finalize each instruction
 
 end Instruction;

@@ -2,13 +2,14 @@ with Ada.Text_IO; use Ada.Text_IO;
 
 with Cli;
 with Instruction;
+with Instruction_List;
 with Label;
 with Parser;
 
 procedure Main is
    Opt         : Cli.Options;
    File        : File_Type;
-   Instrs      : Instruction.Instruction_List.List;
+   Instrs      : Instruction_List.Instruction_List.List;
    Labels      : Label.Label_List.List;
    Parser_Inst : Parser.Instance;
    Curr_Instr  : Instruction.Instr_Ptr;
@@ -59,35 +60,37 @@ begin
 
    --  Expand instruction's labels
    declare
-      Instr_Cursor : Instruction.Instruction_List.Cursor := Instrs.First;
+      Instr_Cursor : Instruction_List.Instruction_List.Cursor := Instrs.First;
    begin
-      while Instruction.Instruction_List.Has_Element (Instr_Cursor) loop
-         Curr_Instr := Instruction.Instruction_List.Element (Instr_Cursor);
+      while Instruction_List.Instruction_List.Has_Element (Instr_Cursor) loop
+         Curr_Instr :=
+            Instruction_List.Instruction_List.Element (Instr_Cursor);
 
          Curr_Instr.Expand_Label (Labels);
 
-         Instruction.Instruction_List.Next (Instr_Cursor);
+         Instruction_List.Instruction_List.Next (Instr_Cursor);
       end loop;
    end;
 
    --  Iterate through instructions to dump or execute them
    declare
-      Instr_Cursor : Instruction.Instruction_List.Cursor := Instrs.First;
+      Instr_Cursor : Instruction_List.Instruction_List.Cursor := Instrs.First;
    begin
-      while Instruction.Instruction_List.Has_Element (Instr_Cursor) loop
-         Curr_Instr := Instruction.Instruction_List.Element (Instr_Cursor);
+      while Instruction_List.Instruction_List.Has_Element (Instr_Cursor) loop
+         Curr_Instr :=
+            Instruction_List.Instruction_List.Element (Instr_Cursor);
 
          --  Display instruction if needed
          if Opt.Dump_Instructions then
             Curr_Instr.Dump;
          end if;
 
-         Instruction.Instruction_List.Next (Instr_Cursor);
+         Instruction_List.Instruction_List.Next (Instr_Cursor);
       end loop;
    end;
 
    --  Free various allocated objects
-   Instruction.Free_Instr_List (Instrs);
+   Instruction_List.Free_Instr_List (Instrs);
    Cli.Finalize (Opt);
 
 exception
