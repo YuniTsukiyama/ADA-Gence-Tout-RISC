@@ -11,7 +11,7 @@ procedure Main is
    Instrs      : Instruction.Instruction_List.List;
    Labels      : Label.Label_List.List;
    Parser_Inst : Parser.Instance;
-   Curr_Instr  : Instruction.Instance;
+   Curr_Instr  : Instruction.Instr_Ptr;
 begin
    Cli.Parse_Options (Opt);
 
@@ -50,7 +50,7 @@ begin
                   Labels.Append (Curr_Label);
                end;
             else
-               Parser_Inst.Parse_Instruction (Curr_Instr);
+               Curr_Instr := Parser_Inst.Parse_Instruction;
                Instrs.Append (Curr_Instr);
             end if;
          end if;

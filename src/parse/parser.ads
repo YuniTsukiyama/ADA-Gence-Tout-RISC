@@ -18,9 +18,9 @@ package Parser is
    function Is_Label (Self  : in out Instance) return Boolean;
    --  Return true if the current instruction is a label
 
-   procedure Parse_Instruction (Self  : in out Instance;
-                                Instr : in out Instruction.Instance);
-   --  Parse and instruction and fill the given Instr
+   function Parse_Instruction (Self  : in out Instance)
+      return Instruction.Instr_Ptr;
+   --  Parse and instruction and return a pointer to an allocated instruction
 
    procedure Parse_Label (Self       : in out Instance;
                           Curr_Label : in out Label.Label);

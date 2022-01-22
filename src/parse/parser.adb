@@ -51,9 +51,11 @@ package body Parser is
    -- Parse_Instruction --
    -----------------------
 
-   procedure Parse_Instruction (Self  : in out Instance;
-                                Instr : in out Instruction.Instance) is
+   function Parse_Instruction (Self  : in out Instance)
+      return Instruction.Instr_Ptr
+   is
       Curr_Tok : Lexer.Token;
+      Instr    : Instruction.Instr_Ptr := new Instruction.Instance;
    begin
       --  Parse mnemonic
       Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Word);
@@ -66,7 +68,7 @@ package body Parser is
       then
          Instr.Left  := null;
          Instr.Right := null;
-         return;
+         return Instr;
       end if;
 
       --  Parse left operand
@@ -77,7 +79,7 @@ package body Parser is
       if Curr_Tok.Tok_Type = Lexer.Newline
       then
          Instr.Right := null;
-         return;
+         return Instr;
       end if;
 
       --  Parse separator
@@ -89,18 +91,19 @@ package body Parser is
       --  There should not be any token left
       Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Newline);
 
-      return;
+      return Instr;
 
    exception
       when Parsing_Error =>
-         Instr.Finalize;
+         Instruction.Finalize (Instr);
          raise Parsing_Error;
       when Constraint_Error =>
+         Instruction.Finalize (Instr);
          Misc.Err ("no such instruction: `"
                    & To_String (Curr_Tok.Value) & "'");
          raise Parsing_Error;
       when Lexer.Lexing_Error =>
-         Instr.Finalize;
+         Instruction.Finalize (Instr);
          raise Lexer.Lexing_Error;
 
    end Parse_Instruction;

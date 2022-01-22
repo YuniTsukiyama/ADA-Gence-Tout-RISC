@@ -1,5 +1,4 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Unchecked_Deallocation;
 
 package body Instruction is
 
@@ -7,19 +6,20 @@ package body Instruction is
    -- Finalize --
    --------------
 
-   procedure Finalize (Self : in out Instance) is
+   procedure Finalize (Self_Ptr : in out Instr_Ptr) is
       procedure Free is new Ada.Unchecked_Deallocation
          (Object => Operand.Instance, Name => Operand.Operand_Ptr);
       use Operand;
    begin
-
-      if Self.Left /= null then
-         Free (Self.Left);
+      if Self_Ptr.Left /= null then
+         Free (Self_Ptr.Left);
       end if;
 
-      if Self.Right /= null then
-         Free (Self.Right);
+      if Self_Ptr.Right /= null then
+         Free (Self_Ptr.Right);
       end if;
+
+      Free_Instr_Ptr (Self_Ptr);
    end Finalize;
 
    ----------
@@ -67,12 +67,12 @@ package body Instruction is
 
    procedure Free_Instr_List (Instrs : Instruction_List.List) is
       Instr_Cursor : Instruction_List.Cursor := Instrs.First;
-      Curr_Instr   : Instance;
+      Curr_Instr   : Instr_Ptr;
    begin
       while Instruction_List.Has_Element (Instr_Cursor) loop
 
          Curr_Instr := Instruction_List.Element (Instr_Cursor);
-         Curr_Instr.Finalize;
+         Finalize (Curr_Instr);
 
          Instruction_List.Next (Instr_Cursor);
       end loop;

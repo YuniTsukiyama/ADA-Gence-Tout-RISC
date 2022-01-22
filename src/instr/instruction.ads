@@ -1,4 +1,5 @@
 with Ada.Containers.Doubly_Linked_Lists;
+with Ada.Unchecked_Deallocation;
 
 with Label;
 with Operand;
@@ -25,7 +26,9 @@ package Instruction is
    end record;
    --  Represents an instruction
 
-   procedure Finalize (Self : in out Instance);
+   type Instr_Ptr is access Instance;
+
+   procedure Finalize (Self_Ptr : in out Instr_Ptr);
    --  Finalize an instruction
 
    procedure Dump (Self : in out Instance);
@@ -35,8 +38,12 @@ package Instruction is
                            Labels : Label.Label_List.List);
    --  Expand instruction's labels to its address
 
+   procedure Free_Instr_Ptr is new Ada.Unchecked_Deallocation
+      (Object => Instance, Name => Instr_Ptr);
+   --  Deallocate an Instance of Instruction
+
    package Instruction_List is new Ada.Containers.Doubly_Linked_Lists
-      (Element_Type => Instance);
+      (Element_Type => Instr_Ptr);
    --  A list of instructions
 
    procedure Free_Instr_List (Instrs : Instruction_List.List);
