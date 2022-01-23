@@ -11,11 +11,11 @@ package body Operand is
    begin
       case Self.Op_Type is
          when Operand.Op_Register =>
-            Put_Line ("Operand (register): %" & Self.Reg'Image);
+            Put_Line ("(register) %" & Self.Reg'Image);
          when Operand.Op_Immediate =>
-            Put_Line ("Operand (immediate): $" & Self.Imm'Image);
+            Put_Line ("(immediate) $" & Self.Imm'Image);
          when Operand.Op_Label =>
-            Put_Line ("Operand (immediate): $" & To_String (Self.Label));
+            Put_Line ("(immediate) $" & To_String (Self.Label));
          when others =>
             null;
       end case;

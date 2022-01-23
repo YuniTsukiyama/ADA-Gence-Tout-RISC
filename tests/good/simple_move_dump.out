@@ -1,3 +1,3 @@
-Mnemonic: OP_MOV
-Left  Operand (register): %C
-Right Operand (immediate): $-8
+Instruction: mov
+Destination: (register) %C
+Source: (immediate) $-8

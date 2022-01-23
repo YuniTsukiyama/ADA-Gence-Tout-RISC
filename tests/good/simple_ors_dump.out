@@ -1,12 +1,16 @@
-Mnemonic: OP_OR
-Left  Operand (register): %C
-Right Operand (immediate): $ 8
-Mnemonic: OP_OR
-Left  Operand (register): %A
-Right Operand (immediate): $-2
-Mnemonic: OP_OR
-Left  Operand (register): %A
-Right Operand (register): %B
-Mnemonic: OP_OR
-Left  Operand (register): %R
-Right Operand (register): %C
+Instruction: or
+Destination: (register) %C
+Source1: (register) %C
+Source2: (immediate) $ 8
+Instruction: or
+Destination: (register) %A
+Source1: (register) %A
+Source2: (immediate) $-2
+Instruction: or
+Destination: (register) %A
+Source1: (register) %A
+Source2: (register) %B
+Instruction: or
+Destination: (register) %R
+Source1: (register) %R
+Source2: (register) %C

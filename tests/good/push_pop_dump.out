@@ -1,8 +1,8 @@
-Mnemonic: OP_PUSH
-Left  Operand (register): %C
-Mnemonic: OP_POP
-Left  Operand (register): %A
-Mnemonic: OP_PUSH
-Left  Operand (register): %A
-Mnemonic: OP_POP
-Left  Operand (register): %R
+Instruction: push
+Source: (register) %C
+Instruction: pop
+Destination: (register) %A
+Instruction: push
+Source: (register) %A
+Instruction: pop
+Destination: (register) %R

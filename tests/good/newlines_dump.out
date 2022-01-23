@@ -1,9 +1,9 @@
-Mnemonic: OP_MOV
-Left  Operand (register): %A
-Right Operand (immediate): $ 42
-Mnemonic: OP_MOV
-Left  Operand (register): %C
-Right Operand (register): %A
-Mnemonic: OP_MOV
-Left  Operand (register): %D
-Right Operand (register): %A
+Instruction: mov
+Destination: (register) %A
+Source: (immediate) $ 42
+Instruction: mov
+Destination: (register) %C
+Source: (register) %A
+Instruction: mov
+Destination: (register) %D
+Source: (register) %A

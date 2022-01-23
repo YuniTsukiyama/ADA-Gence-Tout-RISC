@@ -1,12 +1,12 @@
-Mnemonic: OP_STORE
-Left  Operand (immediate): $ 42
-Right Operand (register): %A
-Mnemonic: OP_LOAD
-Left  Operand (register): %A
-Right Operand (immediate): $ 42
-Mnemonic: OP_STORE
-Left  Operand (register): %B
-Right Operand (register): %A
-Mnemonic: OP_LOAD
-Left  Operand (register): %A
-Right Operand (register): %B
+Instruction: store
+Base: (immediate) $ 42
+Source: (register) %A
+Instruction: load
+Destination: (register) %A
+Base: (immediate) $ 42
+Instruction: store
+Base: (register) %B
+Source: (register) %A
+Instruction: load
+Destination: (register) %A
+Base: (register) %B

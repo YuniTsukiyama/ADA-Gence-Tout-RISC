@@ -12,7 +12,6 @@ procedure Main is
    Instrs      : Instruction_List.Instruction_List.List;
    Labels      : Label.Label_List.List;
    Parser_Inst : Parser.Instance;
-   Curr_Instr  : Instruction.Instr_Ptr;
 begin
    Cli.Parse_Options (Opt);
 
@@ -51,8 +50,7 @@ begin
                   Labels.Append (Curr_Label);
                end;
             else
-               Curr_Instr := Parser_Inst.Parse_Instruction;
-               Instrs.Append (Curr_Instr);
+               Instrs.Append (Parser_Inst.Parse_Instruction);
             end if;
          end if;
       end;
@@ -63,10 +61,12 @@ begin
       Instr_Cursor : Instruction_List.Instruction_List.Cursor := Instrs.First;
    begin
       while Instruction_List.Instruction_List.Has_Element (Instr_Cursor) loop
-         Curr_Instr :=
-            Instruction_List.Instruction_List.Element (Instr_Cursor);
-
-         Curr_Instr.Expand_Label (Labels);
+         declare
+            Curr_Instr : Instruction.Instance'Class :=
+               Instruction_List.Instruction_List.Element (Instr_Cursor).all;
+         begin
+            Curr_Instr.Expand_Label (Labels);
+         end;
 
          Instruction_List.Instruction_List.Next (Instr_Cursor);
       end loop;
@@ -77,13 +77,15 @@ begin
       Instr_Cursor : Instruction_List.Instruction_List.Cursor := Instrs.First;
    begin
       while Instruction_List.Instruction_List.Has_Element (Instr_Cursor) loop
-         Curr_Instr :=
-            Instruction_List.Instruction_List.Element (Instr_Cursor);
-
-         --  Display instruction if needed
-         if Opt.Dump_Instructions then
-            Curr_Instr.Dump;
-         end if;
+         declare
+            Curr_Instr : Instruction.Instance'Class :=
+               Instruction_List.Instruction_List.Element (Instr_Cursor).all;
+         begin
+            --  Display instruction if needed
+            if Opt.Dump_Instructions then
+               Curr_Instr.Dump;
+            end if;
+         end;
 
          Instruction_List.Instruction_List.Next (Instr_Cursor);
       end loop;

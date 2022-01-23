@@ -1,9 +1,8 @@
-with Ada.Unchecked_Deallocation;
-
 with Label;
-with Operand;
 
 package Instruction is
+
+   Invalid_Instruction : exception;
 
    type Mnemonic is (Op_mov,
                      Op_add,
@@ -17,28 +16,21 @@ package Instruction is
                      Op_load,
                      Op_store,
                      Op_jmpz);
-   --  Defines each instruction's mnemonics
 
-   type Instance is tagged record
-      Operation   : Mnemonic;
-      Left, Right : Operand.Operand_Ptr;
-   end record;
+   type Instance is abstract tagged null record;
    --  Represents an instruction
 
-   type Instr_Ptr is access Instance;
+   type Instr_Ptr is access Instance'Class;
+   --  Access to an Instruction
 
-   procedure Finalize (Self_Ptr : in out Instr_Ptr);
+   procedure Finalize (Self : in out Instance) is abstract;
    --  Finalize an instruction
 
-   procedure Dump (Self : in out Instance);
+   procedure Dump (Self : in out Instance) is abstract;
    --  Dump an Instruction instance
 
    procedure Expand_Label (Self   : in out Instance;
-                           Labels : Label.Label_List.List);
+                           Labels : Label.Label_List.List) is abstract;
    --  Expand instruction's labels to its address
-
-   procedure Free_Instr_Ptr is new Ada.Unchecked_Deallocation
-      (Object => Instance, Name => Instr_Ptr);
-   --  Deallocate an Instance of Instruction
 
 end Instruction;
