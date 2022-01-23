@@ -15,7 +15,7 @@ package Instruction.Jmpz_Instr is
    --  Dump a mov Instruction instance
 
    overriding procedure Expand_Label (Self   : in out Instance;
-                                      Labels : Label.Label_List.List);
+                                      Labels : Label_List.Label_List.List);
    --  Expand instruction's labels to its address
 
 end Instruction.Jmpz_Instr;

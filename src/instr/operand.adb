@@ -26,19 +26,21 @@ package body Operand is
    ------------------
 
    procedure Expand_Label (Self : in out Instance;
-                           Labels : Label.Label_List.List) is
-      Label_Cursor : Label.Label_List.Cursor;
+                           Labels : Label_List.Label_List.List) is
+      Label_Cursor : Label_List.Label_List.Cursor;
    begin
       if Self.Op_Type = Op_Label then
-         Label_Cursor := Label.Label_List.Find (Labels, (Symbol => Self.Label,
-                                                         others => <>));
+         Label_Cursor :=
+            Label_List.Label_List.Find (Labels,
+                                       (Symbol => Self.Label, others => <>));
 
-         if not Label.Label_List.Has_Element (Label_Cursor) then
+         if not Label_List.Label_List.Has_Element (Label_Cursor) then
             Misc.Err ("undefined label `" & To_String (Self.Label) & "`");
             return;
          end if;
 
-         Self.Label_Address := Label.Label_List.Element (Label_Cursor).Address;
+         Self.Label_Address :=
+            Label_List.Label_List.Element (Label_Cursor).Address;
       end if;
    end Expand_Label;
 

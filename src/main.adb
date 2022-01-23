@@ -4,13 +4,14 @@ with Cli;
 with Instruction;
 with Instruction_List;
 with Label;
+with Label_List;
 with Parser;
 
 procedure Main is
    Opt         : Cli.Options;
    File        : File_Type;
    Instrs      : Instruction_List.Instruction_List.List;
-   Labels      : Label.Label_List.List;
+   Labels      : Label_List.Label_List.List;
    Parser_Inst : Parser.Instance;
 begin
    Cli.Parse_Options (Opt);

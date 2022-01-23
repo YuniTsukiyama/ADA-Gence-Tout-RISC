@@ -37,7 +37,7 @@ package body Instruction.Jmpz_Instr is
    ------------------
 
    overriding procedure Expand_Label (Self   : in out Instance;
-                           Labels : Label.Label_List.List) is
+                                      Labels : Label_List.Label_List.List) is
    begin
       Self.Label.Expand_Label (Labels);
    end Expand_Label;

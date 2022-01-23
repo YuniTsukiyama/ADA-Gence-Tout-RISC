@@ -1,4 +1,4 @@
-with Label;
+with Label_List;
 
 package Instruction is
 
@@ -30,7 +30,7 @@ package Instruction is
    --  Dump an Instruction instance
 
    procedure Expand_Label (Self   : in out Instance;
-                           Labels : Label.Label_List.List) is abstract;
+                           Labels : Label_List.Label_List.List) is abstract;
    --  Expand instruction's labels to its address
 
 end Instruction;

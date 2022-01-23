@@ -1,5 +1,5 @@
 with Cpu;
-with Label;
+with Label_List;
 with Misc;
 
 package Operand is
@@ -31,7 +31,7 @@ package Operand is
    --  Dump an Operand instance
 
    procedure Expand_Label (Self : in out Instance;
-                           Labels : Label.Label_List.List);
+                           Labels : Label_List.Label_List.List);
    --  Expand labels to its address
 
 end Operand;
