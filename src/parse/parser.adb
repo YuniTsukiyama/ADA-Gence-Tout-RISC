@@ -1,17 +1,18 @@
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+with Ada.Unchecked_Deallocation;
 
-with Instruction.Mov_Instr;
 with Instruction.Add_Instr;
-with Instruction.Sub_Instr;
 with Instruction.And_Instr;
-with Instruction.Or_Instr;
-with Instruction.Nor_Instr;
 with Instruction.Cmp_Instr;
-with Instruction.Push_Instr;
-with Instruction.Pop_Instr;
-with Instruction.Load_Instr;
-with Instruction.Store_Instr;
 with Instruction.Jmpz_Instr;
+with Instruction.Load_Instr;
+with Instruction.Mov_Instr;
+with Instruction.Nor_Instr;
+with Instruction.Or_Instr;
+with Instruction.Pop_Instr;
+with Instruction.Push_Instr;
+with Instruction.Store_Instr;
+with Instruction.Sub_Instr;
 
 package body Parser is
 
@@ -61,6 +62,14 @@ package body Parser is
       Instr.Source := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Mov;
 
    ---------------
@@ -84,6 +93,14 @@ package body Parser is
       Instr.Source2 := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Add;
 
    ---------------
@@ -107,6 +124,14 @@ package body Parser is
       Instr.Source2 := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Sub;
 
    ---------------
@@ -130,6 +155,14 @@ package body Parser is
       Instr.Source2 := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_And;
 
    --------------
@@ -153,6 +186,14 @@ package body Parser is
       Instr.Source2 := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Or;
 
    ---------------
@@ -176,6 +217,14 @@ package body Parser is
       Instr.Source2 := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Nor;
 
    ---------------
@@ -198,6 +247,14 @@ package body Parser is
       Instr.Source2 := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Cmp;
 
    ----------------
@@ -213,6 +270,14 @@ package body Parser is
       Instr.Source := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Push;
 
    ---------------
@@ -228,6 +293,14 @@ package body Parser is
       Instr.Destination := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Pop;
 
    ----------------
@@ -250,6 +323,14 @@ package body Parser is
       Instr.Base := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Load;
 
    -----------------
@@ -272,6 +353,14 @@ package body Parser is
       Instr.Source := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Store;
 
    ----------------
@@ -287,6 +376,14 @@ package body Parser is
       Instr.Label := new Operand.Instance'(Self.Parse_Operand);
 
       return Instr;
+
+   exception
+      when Lexer.Lexing_Error =>
+         Instr.Finalize;
+         raise Lexer.Lexing_Error;
+      when Parsing_Error =>
+         Instr.Finalize;
+         raise Parsing_Error;
    end Parse_Jmpz;
 
    ----------------
@@ -314,12 +411,18 @@ package body Parser is
    function Parse_Instruction (Self  : in out Instance)
       return Instruction.Instr_Ptr
    is
+      procedure Free is new Ada.Unchecked_Deallocation
+         (Object => Instruction.Instance'Class, Name => Instruction.Instr_Ptr);
+
       Curr_Tok  : Lexer.Token;
       Instr_Ptr : Instruction.Instr_Ptr;
+
+      use Instruction;
    begin
-      --  Parse mnemonic
+      --  Get mnemonic
       Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Word);
 
+      --  Dispatch parsing
       case Instruction.Mnemonic'Value (To_String ("Op_" & Curr_Tok.Value)) is
          when Instruction.Op_mov =>
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Mov);
@@ -354,15 +457,15 @@ package body Parser is
 
    exception
       when Parsing_Error =>
-         Instr_Ptr.Finalize;
+         if Instr_Ptr /= null then
+            Instr_Ptr.Finalize;
+         end if;
+         Free (Instr_Ptr);
          raise Parsing_Error;
       when Constraint_Error =>
          Misc.Err ("no such instruction: `"
                    & To_String (Curr_Tok.Value) & "'");
          raise Parsing_Error;
-      when Lexer.Lexing_Error =>
-         Instr_Ptr.Finalize;
-         raise Lexer.Lexing_Error;
 
    end Parse_Instruction;
 

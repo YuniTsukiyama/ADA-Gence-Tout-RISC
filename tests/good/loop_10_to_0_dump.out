@@ -1,0 +1,12 @@
+Instruction: mov
+Destination: (register) %A
+Source: (immediate) $ 10
+Instruction: sub
+Destination: (register) %A
+Source1: (register) %A
+Source2: (immediate) $ 1
+Instruction: cmp
+Source1: (register) %A
+Source2: (immediate) $ 0
+Instruction: jmpz
+Label: (immediate) $loop

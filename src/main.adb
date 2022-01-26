@@ -5,6 +5,7 @@ with Instruction;
 with Instruction_List;
 with Label;
 with Label_List;
+with Lexer;
 with Parser;
 
 procedure Main is
@@ -97,6 +98,7 @@ begin
    Cli.Finalize (Opt);
 
 exception
-   when others =>
+   when Lexer.Lexing_Error | Parser.Parsing_Error =>
+      Instruction_List.Free_Instr_List (Instrs);
       Cli.Finalize (Opt);
 end Main;

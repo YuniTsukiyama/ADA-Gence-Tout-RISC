@@ -127,3 +127,13 @@
     - returncode
     - stdout
     - stderr
+
+- name: Loop 10 to 0
+  stdout_file: loop_10_to_0_dump.out
+  options:
+    - --dump-instr
+    - tests/good/loop_10_to_0.s
+  checks:
+    - returncode
+    - stdout
+    - stderr
