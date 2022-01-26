@@ -1,71 +1,79 @@
 - name: Missing Mnemonic
   options:
     - tests/syntax/missing_mnemonic.s
+  stderr_file: missing_mnemonic.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Three Operands - One
   options:
     - tests/syntax/three_operands_one.s
+  stderr_file: three_operands_one.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Three Operands - Two
   options:
     - tests/syntax/three_operands_two.s
+  stderr_file: three_operands_two.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: No Separator
   options:
     - tests/syntax/no_separator.s
+  stderr_file: no_separator.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Separator - No Operand Before
   options:
     - tests/syntax/separator_no_operand_before.s
+  stderr_file: separator_no_operand_before.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Separator - No Operand After
   options:
     - tests/syntax/separator_no_operand_after.s
+  stderr_file: separator_no_operand_after.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Two Separators
   options:
     - tests/syntax/two_separators.s
+  stderr_file: two_separators.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Colon First
   options:
     - tests/syntax/colon_first.s
+  stderr_file: colon_first.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr

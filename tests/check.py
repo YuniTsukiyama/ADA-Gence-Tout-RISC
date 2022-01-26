@@ -64,38 +64,40 @@ def test(binary, test_case, test_dir):
     checks = test_case.get("checks", [])
 
     if ("stdout" in checks):
-        actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
+        actu_stdout = str(res_comp.stdout, "utf-8")
         stdout_file = test_case.get("stdout_file", "")
         if (stdout_file == ""):
-            expect_stdout = test_case.get("stdout", "").strip('\n')
+            expect_stdout = test_case.get("stdout", "")
             assert actu_stdout == expect_stdout, \
                     f"stdout differs:\n{diff(expect_stdout, actu_stdout)}"
         else:
             with open(test_dir / stdout_file, "r") as fichier:
-                expect_stdout = fichier.read().strip('\n')
+                expect_stdout = fichier.read()
                 assert actu_stdout == expect_stdout, \
                     f"stdout differs:\n{diff(expect_stdout, actu_stdout)}"
 
     if ("stderr" in checks):
-        actu_stderr = str(res_comp.stderr, "utf-8").strip('\n')
+        actu_stderr = str(res_comp.stderr, "utf-8")
+        bin_name_pos = actu_stderr.find("agtr:")
+        actu_stderr = actu_stderr[bin_name_pos if bin_name_pos != -1 else 0:]
         stderr_file = test_case.get("stderr_file", "")
         if (stderr_file == ""):
-            expect_stderr = test_case.get("stderr", "").strip('\n')
+            expect_stderr = test_case.get("stderr", "")
             assert actu_stderr == expect_stderr, \
                     f"stderr differs:\n{diff(expect_stderr, actu_stderr)}"
         else:
             with open(test_dir / stderr_file, "r") as fichier:
-                expect_stderr = fichier.read().strip('\n')
+                expect_stderr = fichier.read()
                 assert actu_stderr == expect_stderr, \
                     f"stderr differs:\n{diff(expect_stderr, actu_stderr)}"
 
     if ("has_stdout" in checks):
-        actu_stdout = str(res_comp.stdout, "utf-8").strip('\n')
+        actu_stdout = str(res_comp.stdout, "utf-8")
         assert actu_stdout != "", \
                 f"Assembly badly assembled. Expected something on stdout, got nothing"
 
     if ("has_stderr" in checks):
-        actu_stderr = str(res_comp.stderr, "utf-8").strip('\n')
+        actu_stderr = str(res_comp.stderr, "utf-8")
         assert actu_stderr != "", \
                 f"Assembly badly assembled. Expected something on stderr, got nothing"
 

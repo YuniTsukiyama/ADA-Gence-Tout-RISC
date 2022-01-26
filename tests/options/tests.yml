@@ -16,7 +16,8 @@
 - name: Invalid option
   options:
     - --invalid-option
+  stderr_file: invalid_option.err
   return_code: 1
   checks:
     - returncode
-    - has_stderr
+    - stderr

@@ -5,24 +5,26 @@
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Undefined label
   options:
     - tests/failure/undefined_label.s
+  stderr_file: undefined_label.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Missing Input File
   stdout_file: missing_input.out
+  stderr_file: missing_input.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Non Existing Input File
   options:
@@ -31,49 +33,54 @@
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Missing Operand - One
   options:
     - tests/failure/missing_operand_one.s
+  stderr_file: missing_operand_one.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Missing Operand - Two
   options:
     - tests/failure/missing_operand_two.s
+  stderr_file: missing_operand_two.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Missing Operand - Three
   options:
     - tests/failure/missing_operand_three.s
+  stderr_file: missing_operand_three.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Too Many Operands
   options:
     - tests/failure/too_many_operands.s
+  stderr_file: too_many_operands.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
 
 - name: Invalid Mnemonic
   options:
     - tests/failure/invalid_mnemonic.s
+  stderr_file: invalid_mnemonic.err
   return_code: 1
   checks:
     - returncode
     - stdout
-    - has_stderr
+    - stderr
