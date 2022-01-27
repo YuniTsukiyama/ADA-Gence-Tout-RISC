@@ -57,9 +57,18 @@ package body Instruction.Mov_Instr is
    -------------
 
    overriding procedure Execute (Self         : in out Instance;
-                                 Cpu_Instance : in out Cpu.Cpu) is
+                                 Cpu_Instance : in out Cpu.Cpu)
+   is
+      use Operand;
    begin
-      null;
+      if Self.Source.Op_Type = Operand.Op_Register
+      then
+         Cpu_Instance.Registers (Self.Destination.Reg) :=
+            Cpu_Instance.Registers (Self.Source.Reg);
+      else
+         Cpu_Instance.Registers (Self.Destination.Reg) :=
+            Self.Source.Imm;
+      end if;
    end Execute;
 
 end Instruction.Mov_Instr;

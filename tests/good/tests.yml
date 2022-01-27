@@ -137,3 +137,21 @@
     - returncode
     - stdout
     - stderr
+
+- name: Exit
+  options:
+    - tests/good/exit.s
+  return_code: 0
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Exit 42
+  options:
+    - tests/good/exit_42.s
+  return_code: 42
+  checks:
+    - returncode
+    - stdout
+    - stderr
