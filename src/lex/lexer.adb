@@ -1,8 +1,6 @@
 with Ada.Characters.Handling; use Ada.Characters.Handling;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 
-with Parser;
-
 package body Lexer is
 
    ---------------
@@ -41,7 +39,7 @@ package body Lexer is
    exception
       when Constraint_Error =>
          Misc.Err ("bad register name `%" & To_String (Reg_Name) & "`");
-         raise Lexing_Error;
+         raise Misc.Solving_Error;
    end Lex_Reg;
 
    -------------
@@ -64,7 +62,7 @@ package body Lexer is
       if (Self.Pos > Self.Input'Last)
          or not Is_Digit (Self.Input (Self.Pos))
       then
-         raise Lexing_Error;
+         raise Misc.Solving_Error;
       end if;
 
       Tok.Immediate := 0;
@@ -85,7 +83,7 @@ package body Lexer is
    exception
       when others =>
          Misc.Err ("missing or invalid immediate expression");
-         raise Lexing_Error;
+         raise Misc.Solving_Error;
    end Lex_Imm;
 
    -------------------
@@ -167,7 +165,7 @@ package body Lexer is
          when ','        => return Self.Lex_Separator;
          when ':'        => return Self.Lex_Colon;
          when 'a' .. 'z' => return Self.Lex_Word;
-         when others     => raise Lexing_Error;
+         when others     => raise Misc.Solving_Error;
       end case;
    end Lex_Tok;
 
@@ -223,7 +221,7 @@ package body Lexer is
       if (Tok.Tok_Type /= Error) and then (Tok.Tok_Type /= Tok_Type) then
          Misc.Err ("unexpected token `" & Tok.Tok_Type'Image
                    & "`, expected `" & Tok_Type'Image & "`");
-         raise Parser.Parsing_Error;
+         raise Misc.Solving_Error;
       end if;
 
       return Tok;

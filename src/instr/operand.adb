@@ -36,7 +36,7 @@ package body Operand is
 
          if not Label_List.Label_List.Has_Element (Label_Cursor) then
             Misc.Err ("undefined label `" & To_String (Self.Label) & "`");
-            return;
+            raise Misc.Solving_Error;
          end if;
 
          Self.Label_Address :=

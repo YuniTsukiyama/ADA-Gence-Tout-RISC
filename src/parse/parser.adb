@@ -39,7 +39,7 @@ package body Parser is
                     Label_Address => -1);
          when others          =>
             Misc.Err ("expecting operand after `,`; got nothing");
-            raise Parsing_Error;
+            raise Misc.Solving_Error;
       end case;
    end Parse_Operand;
 
@@ -65,12 +65,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Mov;
 
    ---------------
@@ -96,12 +93,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Add;
 
    ---------------
@@ -127,12 +121,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Sub;
 
    ---------------
@@ -158,12 +149,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_And;
 
    --------------
@@ -189,12 +177,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Or;
 
    ---------------
@@ -220,12 +205,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Nor;
 
    ---------------
@@ -250,12 +232,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Cmp;
 
    ----------------
@@ -273,12 +252,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Push;
 
    ---------------
@@ -296,12 +272,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Pop;
 
    ----------------
@@ -326,12 +299,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Load;
 
    -----------------
@@ -356,12 +326,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Store;
 
    ----------------
@@ -379,12 +346,9 @@ package body Parser is
       return Instr;
 
    exception
-      when Lexer.Lexing_Error =>
+      when Misc.Solving_Error =>
          Instr.Finalize;
-         raise Lexer.Lexing_Error;
-      when Parsing_Error =>
-         Instr.Finalize;
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
    end Parse_Jmpz;
 
    ----------------
@@ -471,16 +435,16 @@ package body Parser is
       return Instr_Ptr;
 
    exception
-      when Parsing_Error =>
+      when Misc.Solving_Error =>
          if Instr_Ptr /= null then
             Instr_Ptr.Finalize;
          end if;
          Free (Instr_Ptr);
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
       when Constraint_Error =>
          Misc.Err ("no such instruction: `"
                    & To_String (Curr_Tok.Value) & "'");
-         raise Parsing_Error;
+         raise Misc.Solving_Error;
 
    end Parse_Instruction;
 

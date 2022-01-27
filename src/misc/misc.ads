@@ -4,6 +4,8 @@ with Ada.Unchecked_Deallocation;
 
 package Misc is
 
+   Solving_Error : exception;
+
    type String_Ptr is access String;
    --  String pointer
 

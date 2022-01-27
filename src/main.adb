@@ -6,7 +6,7 @@ with Instruction;
 with Instruction_List;
 with Label;
 with Label_List;
-with Lexer;
+with Misc;
 with Parser;
 with Virtual_Machine;
 
@@ -110,7 +110,7 @@ begin
    Cli.Finalize (Opt);
 
 exception
-   when Lexer.Lexing_Error | Parser.Parsing_Error =>
+   when Misc.Solving_Error =>
       Instruction_List.Free_Instr_List (Instrs);
       Cli.Finalize (Opt);
 end Main;
