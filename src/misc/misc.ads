@@ -16,8 +16,11 @@ package Misc is
    procedure Free_Input_Ptr is new Ada.Unchecked_Deallocation
       (Object => String, Name => Input_Ptr);
 
-   subtype Imm8 is Integer range -128 .. 127;
+   subtype Int8 is Integer range -128 .. 127;
    --  Immediates are 8 bit signed integer values
+
+   subtype Int16 is Integer range -32768 .. 32767;
+   --  Registers are 16 bit signed integer values
 
    subtype Word is Unbounded_String;
    --  Word (can contain a mnemonic or a label)

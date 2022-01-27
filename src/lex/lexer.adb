@@ -35,7 +35,7 @@ package body Lexer is
          Self.Pos := Self.Pos + 1;
       end loop;
 
-      Tok.Register := Cpu.Register'Value (To_String (Reg_Name));
+      Tok.Register := Cpu.Register_Type'Value (To_String (Reg_Name));
 
       return Tok;
    exception

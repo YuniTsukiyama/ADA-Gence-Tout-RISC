@@ -14,9 +14,9 @@ package Operand is
    type Instance (Op_Type : Operand_Type) is tagged record
       case Op_Type is
          when Op_Register =>
-            Reg : Cpu.Register;
+            Reg : Cpu.Register_Type;
          when Op_Immediate =>
-            Imm : Misc.Imm8;
+            Imm : Misc.Int8;
          when Op_Label =>
             Label         : Misc.Word;
             Label_Address : Integer;

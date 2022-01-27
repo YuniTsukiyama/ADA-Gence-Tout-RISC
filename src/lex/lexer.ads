@@ -21,9 +21,9 @@ package Lexer is
          when Word =>
             Value : Misc.Word;
          when Register =>
-            Register : Cpu.Register;
+            Register : Cpu.Register_Type;
          when Immediate =>
-            Immediate : Misc.Imm8;
+            Immediate : Misc.Int8;
          when others =>
             null;
       end case;
