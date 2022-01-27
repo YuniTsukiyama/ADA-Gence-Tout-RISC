@@ -1,6 +1,7 @@
 - name: Missing main label
   options:
     - tests/failure/missing_main.s
+  stderr_file: missing_main.err
   return_code: 1
   checks:
     - returncode

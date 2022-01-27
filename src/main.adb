@@ -1,6 +1,7 @@
 with Ada.Text_IO; use Ada.Text_IO;
 
 with Cli;
+with Cpu;
 with Instruction;
 with Instruction_List;
 with Label;
@@ -94,7 +95,16 @@ begin
       end;
    else
       --  Execute the program
-      null;
+      declare
+         Cpu_Inst : Cpu.Cpu;
+      begin
+         Cpu_Inst.Registers (Cpu.IP) := Label_List.Find_Main (Labels);
+
+         if Cpu_Inst.Registers (Cpu.IP) /= -1
+         then
+            null;
+         end if;
+      end;
    end if;
 
    --  Free various allocated objects
