@@ -4,6 +4,7 @@ with Ada.Unchecked_Deallocation;
 with Instruction.Add_Instr;
 with Instruction.And_Instr;
 with Instruction.Cmp_Instr;
+with Instruction.Exit_Instr;
 with Instruction.Jmpz_Instr;
 with Instruction.Load_Instr;
 with Instruction.Mov_Instr;
@@ -387,6 +388,18 @@ package body Parser is
    end Parse_Jmpz;
 
    ----------------
+   -- Parse_Exit --
+   ----------------
+
+   function Parse_Exit  (Self  : in out Instance)
+      return Instruction.Instance'Class
+   is
+      Instr    : Instruction.Exit_Instr.Instance;
+   begin
+      return Instr;
+   end Parse_Exit;
+
+   ----------------
    -- Initialize --
    ----------------
 
@@ -448,6 +461,8 @@ package body Parser is
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Store);
          when Instruction.Op_jmpz =>
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Jmpz);
+         when Instruction.Op_exit =>
+            Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Exit);
       end case;
 
       --  There should not be any token left

@@ -16,7 +16,8 @@ package Instruction is
                      Op_pop,
                      Op_load,
                      Op_store,
-                     Op_jmpz);
+                     Op_jmpz,
+                     Op_exit);
 
    type Instance is abstract tagged null record;
    --  Represents an instruction

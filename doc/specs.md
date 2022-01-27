@@ -60,6 +60,11 @@ Store the content of `reg2` in the memory at address `imm8/reg1`.
 Jumps at the address of `label` or the address stored in `reg` if ZERO flag is
 set.
 
+* EXIT
+
+Stop the program execution. The return value of the program is the value stored
+in the register %R.
+
 ## Registers
 
 A  : General Purpose Register 1 - Argument 1

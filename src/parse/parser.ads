@@ -54,5 +54,7 @@ private
       return Instruction.Instance'Class;
    function Parse_Jmpz  (Self  : in out Instance)
       return Instruction.Instance'Class;
+   function Parse_Exit  (Self  : in out Instance)
+      return Instruction.Instance'Class;
 
 end Parser;
