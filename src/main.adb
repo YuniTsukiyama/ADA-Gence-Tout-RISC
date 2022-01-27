@@ -1,13 +1,14 @@
+with Ada.Command_Line; use Ada.Command_Line;
 with Ada.Text_IO; use Ada.Text_IO;
 
 with Cli;
-with Cpu;
 with Instruction;
 with Instruction_List;
 with Label;
 with Label_List;
 with Lexer;
 with Parser;
+with Virtual_Machine;
 
 procedure Main is
    Opt         : Cli.Options;
@@ -96,14 +97,11 @@ begin
    else
       --  Execute the program
       declare
-         Cpu_Inst : Cpu.Cpu;
+         Return_Value : Exit_Status := 0;
+         Main         : constant Integer := Label_List.Find_Main (Labels);
       begin
-         Cpu_Inst.Registers (Cpu.IP) := Label_List.Find_Main (Labels);
-
-         if Cpu_Inst.Registers (Cpu.IP) /= -1
-         then
-            null;
-         end if;
+         Return_Value := Exit_Status (Virtual_Machine.Execute (Instrs, Main));
+         Ada.Command_Line.Set_Exit_Status (Return_Value);
       end;
    end if;
 

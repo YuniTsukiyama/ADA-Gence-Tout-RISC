@@ -9,6 +9,7 @@ project AGTR is
                         "src/cpu",
                         "src/lex",
                         "src/parse",
+                        "src/vm",
                         "src");
    for Main use ("main.adb");
    for Exec_Dir use ".";

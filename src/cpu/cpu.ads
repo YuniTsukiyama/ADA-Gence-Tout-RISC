@@ -7,6 +7,7 @@ package Cpu is
    type Register_Bank is array (Register_Type) of Misc.Int16;
 
    type Cpu is record
+      Program_Terminated : Boolean := False;
       Registers : Register_Bank := (others => 0);
    end record;
 
