@@ -37,7 +37,7 @@ package body Instruction.Exit_Instr is
    overriding procedure Execute (Self         : in out Instance;
                                  Cpu_Instance : in out Cpu.Cpu) is
    begin
-      null;
+      Cpu_Instance.Program_Terminated := True;
    end Execute;
 
 end Instruction.Exit_Instr;
