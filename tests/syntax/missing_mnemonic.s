@@ -1,2 +1,3 @@
 main:
     %A, %B
+    exit

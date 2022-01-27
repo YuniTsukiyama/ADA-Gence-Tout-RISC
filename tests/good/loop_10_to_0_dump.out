@@ -10,3 +10,4 @@ Source1: (register) %A
 Source2: (immediate) $ 0
 Instruction: jmpz
 Label: (immediate) $loop
+Instruction: Exit

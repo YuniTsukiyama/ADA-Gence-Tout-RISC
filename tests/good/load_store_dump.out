@@ -10,3 +10,4 @@ Source: (register) %A
 Instruction: load
 Destination: (register) %A
 Base: (register) %B
+Instruction: Exit

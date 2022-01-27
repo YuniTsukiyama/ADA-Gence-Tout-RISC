@@ -3,3 +3,4 @@ main:
     pop  %A
     push %A
     pop  %R
+    exit

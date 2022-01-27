@@ -3,3 +3,4 @@ main:
     load  %A,  $42
     store %B,  %A
     load  %A,  %B
+    exit

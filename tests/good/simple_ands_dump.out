@@ -14,3 +14,4 @@ Instruction: and
 Destination: (register) %R
 Source1: (register) %R
 Source2: (register) %C
+Instruction: Exit

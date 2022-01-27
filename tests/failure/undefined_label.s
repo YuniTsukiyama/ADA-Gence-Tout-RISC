@@ -1,2 +1,3 @@
 main:
     jmpz undefined
+    exit

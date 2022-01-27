@@ -3,3 +3,4 @@ main:
     nor %A, $-2
     nor %A, %B
     nor %R, %C
+    exit

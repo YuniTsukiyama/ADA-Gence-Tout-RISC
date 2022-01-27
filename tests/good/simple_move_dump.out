@@ -1,3 +1,4 @@
 Instruction: mov
 Destination: (register) %C
 Source: (immediate) $-8
+Instruction: Exit

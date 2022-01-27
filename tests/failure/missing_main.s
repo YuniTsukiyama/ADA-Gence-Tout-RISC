@@ -1,1 +1,2 @@
     mov %A, %B
+    exit

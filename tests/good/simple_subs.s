@@ -3,3 +3,4 @@ main:
     sub %A, $-2
     sub %A, %B
     sub %R, %C
+    exit

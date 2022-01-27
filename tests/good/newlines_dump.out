@@ -7,3 +7,4 @@ Source: (register) %A
 Instruction: mov
 Destination: (register) %D
 Source: (register) %A
+Instruction: Exit

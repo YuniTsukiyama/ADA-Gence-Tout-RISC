@@ -6,3 +6,4 @@ main:
     mov %C, %A
     mov %B, %R
     mov %D, %C
+    exit

@@ -10,3 +10,4 @@ Source2: (register) %B
 Instruction: cmp
 Source1: (register) %R
 Source2: (register) %C
+Instruction: Exit

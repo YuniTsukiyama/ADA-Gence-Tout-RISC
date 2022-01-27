@@ -1,2 +1,3 @@
 main:
     invalidmnemonic %B
+    exit

@@ -19,3 +19,4 @@ Source: (register) %R
 Instruction: mov
 Destination: (register) %D
 Source: (register) %C
+Instruction: Exit

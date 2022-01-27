@@ -3,3 +3,4 @@ main:
     or %A, $-2
     or %A, %B
     or %R, %C
+    exit

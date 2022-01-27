@@ -7,3 +7,4 @@ main:
 
     mov %D, %A
 
+    exit

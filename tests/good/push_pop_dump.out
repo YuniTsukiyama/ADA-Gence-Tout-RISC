@@ -6,3 +6,4 @@ Instruction: push
 Source: (register) %A
 Instruction: pop
 Destination: (register) %R
+Instruction: Exit

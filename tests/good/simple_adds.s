@@ -3,3 +3,4 @@ main:
     add %A, $2
     add %A, %B
     add %R, %C
+    exit
