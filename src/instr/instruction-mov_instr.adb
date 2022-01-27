@@ -52,4 +52,14 @@ package body Instruction.Mov_Instr is
       null;
    end Expand_Label;
 
+   -------------
+   -- Execute --
+   -------------
+
+   overriding procedure Execute (Self         : in out Instance;
+                                 Cpu_Instance : in out Cpu.Cpu) is
+   begin
+      null;
+   end Execute;
+
 end Instruction.Mov_Instr;

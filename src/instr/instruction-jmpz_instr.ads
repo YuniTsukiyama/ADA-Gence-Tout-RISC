@@ -18,4 +18,8 @@ package Instruction.Jmpz_Instr is
                                       Labels : Label_List.Label_List.List);
    --  Expand instruction's labels to its address
 
+   overriding procedure Execute (Self         : in out Instance;
+                                 Cpu_Instance : in out Cpu.Cpu);
+   --  Execute a jmpz instruction
+
 end Instruction.Jmpz_Instr;

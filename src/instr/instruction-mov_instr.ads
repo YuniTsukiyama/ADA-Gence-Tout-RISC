@@ -18,4 +18,8 @@ package Instruction.Mov_Instr is
                                       Labels : Label_List.Label_List.List);
    --  Expand instruction's labels to its address
 
+   overriding procedure Execute (Self         : in out Instance;
+                                 Cpu_Instance : in out Cpu.Cpu);
+   --  Execute a mov instruction
+
 end Instruction.Mov_Instr;

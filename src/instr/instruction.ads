@@ -1,3 +1,4 @@
+with Cpu;
 with Label_List;
 
 package Instruction is
@@ -32,5 +33,9 @@ package Instruction is
    procedure Expand_Label (Self   : in out Instance;
                            Labels : Label_List.Label_List.List) is abstract;
    --  Expand instruction's labels to its address
+
+   procedure Execute (Self         : in out Instance;
+                      Cpu_Instance : in out Cpu.Cpu) is abstract;
+   --  Execute an instruction
 
 end Instruction;
