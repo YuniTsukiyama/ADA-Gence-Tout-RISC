@@ -69,6 +69,7 @@ D  : General Purpose Register 4 - Argument 4
 R  : General Purpose Register 5 - Return value
 SP : Stack pointer
 BP : Base pointer
+IP : Instruction Pointer
 F  : Flags register
 
 ## Flags register
