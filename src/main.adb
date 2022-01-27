@@ -74,24 +74,28 @@ begin
       end loop;
    end;
 
-   --  Iterate through instructions to dump or execute them
-   declare
-      Instr_Cursor : Instruction_List.Instruction_List.Cursor := Instrs.First;
-   begin
-      while Instruction_List.Instruction_List.Has_Element (Instr_Cursor) loop
-         declare
-            Curr_Instr : Instruction.Instance'Class :=
-               Instruction_List.Instruction_List.Element (Instr_Cursor).all;
-         begin
-            --  Display instruction if needed
-            if Opt.Dump_Instructions then
+   if Opt.Dump_Instructions then
+      --  Iterate through instructions to dump them
+      declare
+         Instr_Cursor : Instruction_List.Instruction_List.Cursor :=
+            Instrs.First;
+      begin
+         while Instruction_List.Instruction_List.Has_Element (Instr_Cursor)
+            loop
+            declare
+               Curr_Instr : Instruction.Instance'Class :=
+                  Instruction_List.Instruction_List.Element (Instr_Cursor).all;
+            begin
                Curr_Instr.Dump;
-            end if;
-         end;
+            end;
 
-         Instruction_List.Instruction_List.Next (Instr_Cursor);
-      end loop;
-   end;
+            Instruction_List.Instruction_List.Next (Instr_Cursor);
+         end loop;
+      end;
+   else
+      --  Execute the program
+      null;
+   end if;
 
    --  Free various allocated objects
    Instruction_List.Free_Instr_List (Instrs);
