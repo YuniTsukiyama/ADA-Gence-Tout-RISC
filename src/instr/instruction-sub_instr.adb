@@ -66,9 +66,33 @@ package body Instruction.Sub_Instr is
    -------------
 
    overriding procedure Execute (Self         : in out Instance;
-                                 Cpu_Instance : in out Cpu.Cpu) is
+                                 Cpu_Instance : in out Cpu.Cpu)
+   is
+      Left_Value, Right_Value, Result : Integer;
+
+      use Operand;
    begin
-      null;
+      --  Get left value
+      if Self.Source1.Op_Type = Operand.Op_Register
+      then
+         Left_Value := Cpu_Instance.Registers (Self.Source1.Reg);
+      else
+         Left_Value := Self.Source1.Imm;
+      end if;
+
+      --  Get right value
+      if Self.Source2.Op_Type = Operand.Op_Register
+      then
+         Right_Value := Cpu_Instance.Registers (Self.Source2.Reg);
+      else
+         Right_Value := Self.Source2.Imm;
+      end if;
+
+      Result := Left_Value - Right_Value;
+
+      Cpu.Set_Flags (Cpu_Instance, Result);
+
+      Cpu_Instance.Registers (Self.Destination.Reg) := Result;
    end Execute;
 
 end Instruction.Sub_Instr;
