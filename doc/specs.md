@@ -79,6 +79,17 @@ F  : Flags register
 
 ## Flags register
 
+Flags can be modified by the following instructions:
+
+- ADD
+- SUB
+- CMP
+- AND
+- OR
+- NOR
+
+The flags register is organized as follow: `.....OZN'.
+
 Each of the following flags is unset when the following conditions does not
 apply.
 
@@ -87,34 +98,10 @@ apply.
 The OVERFLOW flag is set when the result of an operation is too large to fit in
 the register width.
 
-The flag can be modified by the following instructions:
-
-- ADD
-- SUB
-- CMP
-
 * Z: ZERO
 
 The zero flag is set when an operation results in a zero value.
 
-The flag can be modified by the following instructions:
-
-- ADD
-- SUB
-- CMP
-- AND
-- OR
-- NOR
-
 * N: NEGATIVE
 
 The NEGATIVE flag is set when an operation results in a negative value.
-
-The flag can be modified by the following instructions:
-
-- ADD
-- SUB
-- CMP
-- AND
-- OR
-- NOR

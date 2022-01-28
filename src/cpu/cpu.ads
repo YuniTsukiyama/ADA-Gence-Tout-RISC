@@ -11,4 +11,6 @@ package Cpu is
       Registers : Register_Bank := (others => 0);
    end record;
 
+   procedure Set_Flags (Cpu_Instance : in out Cpu; Value : Integer);
+
 end Cpu;
