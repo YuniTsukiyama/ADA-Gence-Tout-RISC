@@ -1,5 +1,6 @@
-with Ada.Unchecked_Deallocation;
 with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Unchecked_Deallocation;
+with Interfaces; use Interfaces;
 
 package body Instruction.Jmpz_Instr is
 
@@ -47,9 +48,14 @@ package body Instruction.Jmpz_Instr is
    -------------
 
    overriding procedure Execute (Self         : in out Instance;
-                                 Cpu_Instance : in out Cpu.Cpu) is
+                                 Cpu_Instance : in out Cpu.Cpu)
+   is
+      Flags : constant Unsigned_8 :=
+         Unsigned_8 (Cpu_Instance.Registers (Cpu.F));
    begin
-      null;
+      if (Flags and 2#00000010#) /= 0 then
+         Cpu_Instance.Registers (Cpu.IP) := Self.Label.Label_Address - 1;
+      end if;
    end Execute;
 
 end Instruction.Jmpz_Instr;
