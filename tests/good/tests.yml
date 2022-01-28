@@ -155,3 +155,21 @@
     - returncode
     - stdout
     - stderr
+
+- name: Mul 2 * 5
+  options:
+    - tests/good/mul_2_5.s
+  return_code: 10
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Pow 2 ^ 7 - Ugly version
+  options:
+    - tests/good/ugly_pow_2_7.s
+  return_code: 128
+  checks:
+    - returncode
+    - stdout
+    - stderr
