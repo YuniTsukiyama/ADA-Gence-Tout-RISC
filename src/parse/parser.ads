@@ -28,33 +28,35 @@ private
 
    function Parse_Operand (Self : in out Instance) return Operand.Instance;
 
-   function Parse_Mov   (Self  : in out Instance)
+   function Parse_Mov     (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Add   (Self  : in out Instance)
+   function Parse_Add     (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Sub   (Self  : in out Instance)
+   function Parse_Sub     (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_And   (Self  : in out Instance)
+   function Parse_And     (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Or    (Self  : in out Instance)
+   function Parse_Or      (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Nor   (Self  : in out Instance)
+   function Parse_Nor     (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Cmp   (Self  : in out Instance)
+   function Parse_Cmp     (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Push  (Self  : in out Instance)
+   function Parse_Push    (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Pop   (Self  : in out Instance)
+   function Parse_Pop     (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Load  (Self  : in out Instance)
+   function Parse_Load    (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Store (Self  : in out Instance)
+   function Parse_Store   (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Jmpz  (Self  : in out Instance)
+   function Parse_Jmpz    (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Exit  (Self  : in out Instance)
+   function Parse_Exit    (Self : in out Instance)
       return Instruction.Instance'Class;
-   function Parse_Syscall  (Self  : in out Instance)
+   function Parse_Syscall (Self : in out Instance)
+      return Instruction.Instance'Class;
+   function Parse_Jmp     (Self : in out Instance)
       return Instruction.Instance'Class;
 
 end Parser;

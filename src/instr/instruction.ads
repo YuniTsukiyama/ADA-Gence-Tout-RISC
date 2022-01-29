@@ -5,19 +5,20 @@ package Instruction is
 
    Invalid_Instruction : exception;
 
-   type Mnemonic is (Op_mov,
-                     Op_add,
-                     Op_sub,
+   type Mnemonic is (Op_add,
                      Op_and,
-                     Op_or,
-                     Op_nor,
                      Op_cmp,
-                     Op_push,
-                     Op_pop,
-                     Op_load,
-                     Op_store,
-                     Op_jmpz,
                      Op_exit,
+                     Op_jmp,
+                     Op_jmpz,
+                     Op_load,
+                     Op_mov,
+                     Op_nor,
+                     Op_or,
+                     Op_pop,
+                     Op_push,
+                     Op_store,
+                     Op_sub,
                      Op_syscall);
 
    type Instance is abstract tagged null record;

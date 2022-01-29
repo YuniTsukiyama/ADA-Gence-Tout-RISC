@@ -55,6 +55,10 @@ Load a value from memory at address `imm8/reg2` and store it in `reg1`.
 
 Store the content of `reg2` in the memory at address `imm8/reg1`.
 
+* JMP label/reg
+
+Jumps at the address of `label` or the address stored in `reg`.
+
 * JMPZ label/reg
 
 Jumps at the address of `label` or the address stored in `reg` if ZERO flag is

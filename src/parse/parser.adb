@@ -5,6 +5,7 @@ with Instruction.Add_Instr;
 with Instruction.And_Instr;
 with Instruction.Cmp_Instr;
 with Instruction.Exit_Instr;
+with Instruction.Jmp_Instr;
 with Instruction.Jmpz_Instr;
 with Instruction.Load_Instr;
 with Instruction.Mov_Instr;
@@ -353,6 +354,26 @@ package body Parser is
    end Parse_Jmpz;
 
    ----------------
+   -- Parse_Jmp --
+   ----------------
+
+   function Parse_Jmp   (Self  : in out Instance)
+      return Instruction.Instance'Class
+   is
+      Instr    : Instruction.Jmp_Instr.Instance;
+   begin
+      --  Parse label operand
+      Instr.Label := new Operand.Instance'(Self.Parse_Operand);
+
+      return Instr;
+
+   exception
+      when Misc.Solving_Error =>
+         Instr.Finalize;
+         raise Misc.Solving_Error;
+   end Parse_Jmp;
+
+   ----------------
    -- Parse_Exit --
    ----------------
 
@@ -442,6 +463,8 @@ package body Parser is
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Exit);
          when Instruction.Op_syscall =>
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Syscall);
+         when Instruction.Op_jmp =>
+            Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Jmp);
       end case;
 
       --  There should not be any token left
