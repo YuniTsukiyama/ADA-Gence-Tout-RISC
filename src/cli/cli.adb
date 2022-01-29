@@ -20,13 +20,15 @@ package body Cli is
    procedure Parse_Options (Opt : out Options) is
    begin
       loop
-         case Getopt ("-help -dump-instr -test") is
+         case Getopt ("-help -dump-instr -trace -test") is
             when '-'    =>
                if Full_Switch = "-help" then
                   Opt.Help := True;
                   return;
                elsif Full_Switch = "-dump-instr" then
                   Opt.Dump_Instructions := True;
+               elsif Full_Switch = "-trace" then
+                  Opt.Trace := True;
                elsif Full_Switch = "-test" then
                   Opt.Test := True;
                   return;

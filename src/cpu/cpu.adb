@@ -2,6 +2,27 @@ with Interfaces; use Interfaces;
 
 package body Cpu is
 
+   ----------------
+   -- Dump_State --
+   ----------------
+
+   procedure Dump_State (Cpu_Instance : in out Cpu) is
+   begin
+      Put_Line ("Reg A  = " & Integer'Image (Cpu_Instance.Registers (A)));
+      Put_Line ("Reg B  = " & Integer'Image (Cpu_Instance.Registers (B)));
+      Put_Line ("Reg C  = " & Integer'Image (Cpu_Instance.Registers (C)));
+      Put_Line ("Reg D  = " & Integer'Image (Cpu_Instance.Registers (D)));
+      Put_Line ("Reg R  = " & Integer'Image (Cpu_Instance.Registers (R)));
+      Put_Line ("Reg SP = " & Integer'Image (Cpu_Instance.Registers (SP)));
+      Put_Line ("Reg BP = " & Integer'Image (Cpu_Instance.Registers (BP)));
+      Put_Line ("Reg IP = " & Integer'Image (Cpu_Instance.Registers (IP)));
+      Put_Line ("Reg F  = " & Integer'Image (Cpu_Instance.Registers (F)));
+   end Dump_State;
+
+   ---------------
+   -- Set_Flags --
+   ---------------
+
    procedure Set_Flags (Cpu_Instance : in out Cpu; Value : Integer) is
       Value_16 : constant Misc.Int16 := Value;
       Overflow : constant Boolean :=

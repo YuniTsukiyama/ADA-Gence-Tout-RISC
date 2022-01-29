@@ -1,3 +1,5 @@
+with Ada.Text_IO; use Ada.Text_IO;
+
 with Cpu;
 
 package body Virtual_Machine is
@@ -7,7 +9,7 @@ package body Virtual_Machine is
    -------------
 
    function Execute (Instrs : Instruction_List.Instruction_List.List;
-                     Main_Address : Integer)
+                     Main_Address : Integer; Trace : Boolean)
       return Misc.Int16
    is
       Cpu_Inst : Cpu.Cpu;
@@ -17,6 +19,11 @@ package body Virtual_Machine is
       if Cpu_Inst.Registers (Cpu.IP) = -1
       then
          return 1;
+      end if;
+
+      if Trace then
+         Put_Line ("Initial CPU State:");
+         Cpu.Dump_State (Cpu_Inst);
       end if;
 
       while not Cpu_Inst.Program_Terminated
@@ -30,8 +37,19 @@ package body Virtual_Machine is
                   Instruction_List.Instruction_List.Next (Instr_Cursor);
             end loop;
 
+            if Trace then
+               New_Line;
+               Put_Line ("Executing:");
+               Instruction_List.Instruction_List.Element
+                  (Instr_Cursor).Dump;
+            end if;
+
             Instruction_List.Instruction_List.Element
                (Instr_Cursor).Execute (Cpu_Inst);
+
+            if Trace then
+               Cpu.Dump_State (Cpu_Inst);
+            end if;
          end;
 
          Cpu_Inst.Registers (Cpu.IP) := Cpu_Inst.Registers (Cpu.IP) + 1;

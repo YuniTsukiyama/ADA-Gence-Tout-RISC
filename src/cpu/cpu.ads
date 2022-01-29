@@ -16,7 +16,11 @@ package Cpu is
       FD_Bank_Unit : FD_Bank;
    end record;
 
+   procedure Dump_State (Cpu_Instance : in out Cpu);
+   --  Display CPU_Instance state
+
    procedure Set_Flags (Cpu_Instance : in out Cpu; Value : Integer);
+   --  Set the register flags using Value parameter
 
    function First_FD (Cpu_Instance : Cpu) return Integer;
    --- Get the first available file descriptor

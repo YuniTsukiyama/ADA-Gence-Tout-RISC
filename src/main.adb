@@ -97,11 +97,11 @@ begin
    else
       --  Execute the program
       declare
-         Return_Value : Exit_Status := 0;
+         Return_Value : Integer := 0;
          Main         : constant Integer := Label_List.Find_Main (Labels);
       begin
-         Return_Value := Exit_Status (Virtual_Machine.Execute (Instrs, Main));
-         Ada.Command_Line.Set_Exit_Status (Return_Value);
+         Return_Value := Virtual_Machine.Execute (Instrs, Main, Opt.Trace);
+         Ada.Command_Line.Set_Exit_Status (Exit_Status (Return_Value));
       end;
    end if;
 

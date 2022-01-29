@@ -7,6 +7,7 @@ package Cli is
    type Options is record
       Input_File        : Misc.String_Ptr := null;
       Dump_Instructions : Boolean         := False;
+      Trace             : Boolean         := False;
       Help              : Boolean         := False;
       Test              : Boolean         := False;
    end record;
