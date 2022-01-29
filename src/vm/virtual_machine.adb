@@ -21,6 +21,11 @@ package body Virtual_Machine is
          Cpu.Dump_State (Cpu_Inst);
       end if;
 
+      if Trace then
+         Put_Line ("Initial CPU State:");
+         Cpu.Dump_State (Cpu_Inst);
+      end if;
+
       while not Cpu_Inst.Program_Terminated
       loop
          declare
