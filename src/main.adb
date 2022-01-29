@@ -98,7 +98,7 @@ begin
       --  Execute the program
       declare
          Return_Value : Integer := 0;
-         Main         : constant Integer := Label_List.Find_Main (Labels);
+         Main         : constant Misc.Address := Label_List.Find_Main (Labels);
       begin
          Return_Value := Virtual_Machine.Execute (Instrs, Main, Opt.Trace);
          Ada.Command_Line.Set_Exit_Status (Exit_Status (Return_Value));

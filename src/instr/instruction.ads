@@ -38,7 +38,8 @@ package Instruction is
    --  Expand instruction's labels to its address
 
    procedure Execute (Self         : in out Instance;
-                      Cpu_Instance : in out Cpu.Cpu) is abstract;
+                      Cpu_Instance : in out Cpu.Cpu) is abstract
+      with Pre'Class => Cpu_Instance.Program_Terminated = False;
    --  Execute an instruction
 
 end Instruction;

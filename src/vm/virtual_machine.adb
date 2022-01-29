@@ -9,17 +9,12 @@ package body Virtual_Machine is
    -------------
 
    function Execute (Instrs : Instruction_List.Instruction_List.List;
-                     Main_Address : Integer; Trace : Boolean)
+                     Main_Address : Misc.Address; Trace : Boolean)
       return Misc.Int16
    is
       Cpu_Inst : Cpu.Cpu;
    begin
       Cpu_Inst.Registers (Cpu.IP) := Main_Address;
-
-      if Cpu_Inst.Registers (Cpu.IP) = -1
-      then
-         return 1;
-      end if;
 
       if Trace then
          Put_Line ("Initial CPU State:");

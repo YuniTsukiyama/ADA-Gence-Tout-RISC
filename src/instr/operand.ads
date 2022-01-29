@@ -31,7 +31,8 @@ package Operand is
    --  Dump an Operand instance
 
    procedure Expand_Label (Self : in out Instance;
-                           Labels : Label_List.Label_List.List);
+                           Labels : Label_List.Label_List.List)
+      with Pre => Self.Op_Type = Op_Label;
    --  Expand labels to its address
 
 end Operand;

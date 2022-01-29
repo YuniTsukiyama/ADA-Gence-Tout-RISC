@@ -36,7 +36,8 @@ package Lexer is
       Next_Tok : Token;
    end record;
 
-   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
+   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr)
+      with Pre => Input'Length > 0;
    --  Initialize the Lexer
 
    overriding procedure Finalize (Self : in out Instance);
@@ -46,7 +47,8 @@ package Lexer is
    --  Pop a token
 
    function Expect_Tok (Self : in out Instance; Tok_Type : Token_Type)
-      return Token;
+      return Token
+      with Pre => (Tok_Type /= Error and Tok_Type /= None);
    --  Pop a token and return an error if not the expected one
 
    function Peek_Tok (Self : in out Instance) return Token;

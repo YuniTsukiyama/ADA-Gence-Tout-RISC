@@ -10,7 +10,8 @@ package Parser is
       Lexer_Inst : Lexer.Instance;
    end record;
 
-   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr);
+   procedure Initialize (Self : in out Instance; Input : Misc.Input_Ptr)
+      with Pre => Input'Length > 0;
    --  Initialize the Parser
 
    function Is_Label (Self  : in out Instance) return Boolean;
@@ -22,7 +23,7 @@ package Parser is
 
    procedure Parse_Label (Self       : in out Instance;
                           Curr_Label : in out Label.Label);
-   --  Parse and instruction and fill the given Instr
+   --  Parse a label and fill the given Curr_Label
 
 private
 

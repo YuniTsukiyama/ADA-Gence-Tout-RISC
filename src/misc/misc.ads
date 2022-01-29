@@ -24,10 +24,14 @@ package Misc is
    subtype Int16 is Integer range -32768 .. 32767;
    --  Registers are 16 bit signed integer values
 
+   subtype Address is Integer range 0 .. 65535;
+   --  Addresses can be contained on 16bits and are strictly positive
+
    subtype Word is Unbounded_String;
    --  Word (can contain a mnemonic or a label)
 
-   procedure Err (Err_Message : String; Err_Code : Exit_Status := Failure);
+   procedure Err (Err_Message : String; Err_Code : Exit_Status := Failure)
+      with Pre => Err_Message'Length > 0;
    --  Display 'String' message on standard_Error prefixed by command name
 
 end Misc;

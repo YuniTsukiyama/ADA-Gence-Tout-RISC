@@ -29,19 +29,17 @@ package body Operand is
                            Labels : Label_List.Label_List.List) is
       Label_Cursor : Label_List.Label_List.Cursor;
    begin
-      if Self.Op_Type = Op_Label then
-         Label_Cursor :=
-            Label_List.Label_List.Find (Labels,
-                                       (Symbol => Self.Label, others => <>));
+      Label_Cursor :=
+         Label_List.Label_List.Find (Labels,
+                                    (Symbol => Self.Label, others => <>));
 
-         if not Label_List.Label_List.Has_Element (Label_Cursor) then
-            Misc.Err ("undefined label `" & To_String (Self.Label) & "`");
-            raise Misc.Solving_Error;
-         end if;
-
-         Self.Label_Address :=
-            Label_List.Label_List.Element (Label_Cursor).Address;
+      if not Label_List.Label_List.Has_Element (Label_Cursor) then
+         Misc.Err ("undefined label `" & To_String (Self.Label) & "`");
+         raise Misc.Solving_Error;
       end if;
+
+      Self.Label_Address :=
+         Label_List.Label_List.Element (Label_Cursor).Address;
    end Expand_Label;
 
 end Operand;

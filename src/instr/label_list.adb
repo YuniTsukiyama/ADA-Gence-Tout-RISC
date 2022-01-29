@@ -1,14 +1,12 @@
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 
-with Misc;
-
 package body Label_List is
 
    ---------------
    -- Find_Main --
    ---------------
 
-   function Find_Main (Labels : Label_List.List) return Integer
+   function Find_Main (Labels : Label_List.List) return Misc.Address
    is
       Label_Cursor : Label_List.Cursor;
    begin
@@ -18,7 +16,7 @@ package body Label_List is
 
       if not Label_List.Has_Element (Label_Cursor) then
          Misc.Err ("undefined label `main`");
-         return -1;
+         raise Misc.Solving_Error;
       end if;
 
       return Label_List.Element (Label_Cursor).Address;

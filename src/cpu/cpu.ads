@@ -19,7 +19,8 @@ package Cpu is
    procedure Dump_State (Cpu_Instance : in out Cpu);
    --  Display CPU_Instance state
 
-   procedure Set_Flags (Cpu_Instance : in out Cpu; Value : Integer);
+   procedure Set_Flags (Cpu_Instance : in out Cpu; Value : Misc.Int16)
+      with Pre => Cpu_Instance.Program_Terminated = False;
    --  Set the register flags using Value parameter
 
    function First_FD (Cpu_Instance : Cpu) return Integer;
