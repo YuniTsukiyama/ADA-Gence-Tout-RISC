@@ -21,7 +21,7 @@ package Cli is
    procedure Display_Help;
    --  Display help to stdout
 
-   procedure Display_test;
+   procedure Display_Test;
    --  Just to test the testsuite
 
 end Cli;

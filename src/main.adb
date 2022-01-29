@@ -27,7 +27,7 @@ begin
    end if;
 
    if Opt.Test then
-      Cli.Display_test;
+      Cli.Display_Test;
       Cli.Finalize (Opt);
       return;
    end if;

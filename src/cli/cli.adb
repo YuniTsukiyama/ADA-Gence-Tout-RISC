@@ -67,9 +67,13 @@ package body Cli is
       Put_Line ("  --dump-instr        Dump the instructions");
    end Display_Help;
 
-   procedure Display_test is
+   ------------------
+   -- Display_Test --
+   ------------------
+
+   procedure Display_Test is
    begin
       Put_Line ("Test");
-   end Display_test;
+   end Display_Test;
 
 end Cli;
