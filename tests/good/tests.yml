@@ -191,3 +191,12 @@
     - returncode
     - stdout
     - stderr
+
+- name: Or
+  options:
+    - tests/good/or.s
+  return_code: 95
+  checks:
+    - returncode
+    - stdout
+    - stderr
