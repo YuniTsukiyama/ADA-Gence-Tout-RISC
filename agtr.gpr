@@ -6,7 +6,6 @@ project AGTR is
    for Source_Dirs use ("src/misc",
                         "src/cli",
                         "src/instr",
-                        "src/cpu",
                         "src/lex",
                         "src/parse",
                         "src/vm",

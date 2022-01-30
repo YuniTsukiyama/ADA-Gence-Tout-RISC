@@ -1,5 +1,6 @@
 with Ada.Text_IO; use Ada.Text_IO;
 
+with Memory;
 with Misc;
 
 package Cpu is
@@ -11,9 +12,10 @@ package Cpu is
    type FD_Bank is array (3 .. 255) of File_Type;
 
    type Cpu is record
-      Program_Terminated : Boolean := False;
-      Registers : Register_Bank := (others => 0);
-      FD_Bank_Unit : FD_Bank;
+      Program_Terminated : Boolean       := False;
+      Registers          : Register_Bank := (others => 0);
+      FD_Bank_Unit       : FD_Bank;
+      Memory_Unit        : Memory.Instance;
    end record;
 
    procedure Dump_State (Cpu_Instance : Cpu);
