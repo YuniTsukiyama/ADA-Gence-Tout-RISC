@@ -1,5 +1,8 @@
 with Ada.Unchecked_Deallocation;
 with Ada.Text_IO; use Ada.Text_IO;
+with Interfaces; use Interfaces;
+
+with Misc;
 
 package body Instruction.And_Instr is
 
@@ -66,9 +69,21 @@ package body Instruction.And_Instr is
    -------------
 
    overriding procedure Execute (Self         : in out Instance;
-                                 Cpu_Instance : in out Cpu.Cpu) is
+                                 Cpu_Instance : in out Cpu.Cpu)
+   is
+      Left, Right : Unsigned_16;
    begin
-      null;
+      Left := Unsigned_16 (Cpu_Instance.Registers (Self.Source1.Reg));
+
+      if Operand."=" (Self.Source2.Op_Type, Operand.Op_Register)
+      then
+         Right := Unsigned_16 (Cpu_Instance.Registers (Self.Source2.Reg));
+      else
+         Right := Unsigned_16 (Self.Source2.Imm);
+      end if;
+
+      Cpu_Instance.Registers (Self.Destination.Reg) :=
+         Misc.Int16 (Left and Right);
    end Execute;
 
 end Instruction.And_Instr;

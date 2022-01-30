@@ -182,3 +182,12 @@
     - returncode
     - stdout
     - stderr
+
+- name: And
+  options:
+    - tests/good/and.s
+  return_code: 64
+  checks:
+    - returncode
+    - stdout
+    - stderr
