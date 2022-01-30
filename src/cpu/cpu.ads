@@ -16,7 +16,7 @@ package Cpu is
       FD_Bank_Unit : FD_Bank;
    end record;
 
-   procedure Dump_State (Cpu_Instance : in out Cpu);
+   procedure Dump_State (Cpu_Instance : Cpu);
    --  Display CPU_Instance state
 
    procedure Set_Flags (Cpu_Instance : in out Cpu; Value : Misc.Int16)

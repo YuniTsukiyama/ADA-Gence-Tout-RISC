@@ -40,7 +40,8 @@ package Lexer is
       with Pre => Input'Length > 0;
    --  Initialize the Lexer
 
-   overriding procedure Finalize (Self : in out Instance);
+   overriding procedure Finalize (Self : in out Instance)
+      with Post => Misc."=" (Self.Input, null);
    --  Finalize the Lexer
 
    function Pop_Tok (Self : in out Instance) return Token;
@@ -51,11 +52,14 @@ package Lexer is
       with Pre => (Tok_Type /= Error and Tok_Type /= None);
    --  Pop a token and return an error if not the expected one
 
-   function Peek_Tok (Self : in out Instance) return Token;
+   function Peek_Tok (Self : in out Instance) return Token
+      with Post => (Self.Curr_Tok.Tok_Type /= None);
    --  Peek a token
 
-   function Lookahead_Tok (Self : in out Instance) return Token;
-   --  Peek a token without discarding the current one
+   function Lookahead_Tok (Self : in out Instance) return Token
+      with Post => (Self.Curr_Tok.Tok_Type /= None)
+                and (Self.Next_Tok.Tok_Type /= None);
+   --  Peek a new token without discarding the current one
 
    procedure Discard_Tok (Self : in out Instance);
    --  Discard a token

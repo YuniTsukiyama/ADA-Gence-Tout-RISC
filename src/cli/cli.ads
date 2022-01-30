@@ -12,10 +12,12 @@ package Cli is
       Test              : Boolean         := False;
    end record;
 
-   procedure Finalize (Opt : in out Options);
+   procedure Finalize (Opt : in out Options)
+      with Post => Misc."=" (Opt.Input_File, null);
    --  Finalize an option record
 
-   procedure Parse_Options (Opt : out Options);
+   procedure Parse_Options (Opt : out Options)
+      with Post => (Opt.Help or Opt.Test or Misc."/=" (Opt.Input_File, null));
    --  Parse options from the command line and fill the given record
 
    procedure Display_Help;

@@ -14,10 +14,10 @@ package Parser is
       with Pre => Input'Length > 0;
    --  Initialize the Parser
 
-   function Is_Label (Self  : in out Instance) return Boolean;
+   function Is_Label (Self : in out Instance) return Boolean;
    --  Return true if the current instruction is a label
 
-   function Parse_Instruction (Self  : in out Instance)
+   function Parse_Instruction (Self : in out Instance)
       return Instruction.Instr_Ptr;
    --  Parse and instruction and return a pointer to an allocated instruction
 

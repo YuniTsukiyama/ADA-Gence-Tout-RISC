@@ -38,7 +38,7 @@ package body Parser is
                     Imm => Curr_Tok.Immediate);
          when Lexer.Word      =>
             return (Op_Type => Operand.Op_Label, Label => Curr_Tok.Value,
-                    Label_Address => -1);
+                    Label_Address => 0);
          when others          =>
             Misc.Err ("expecting operand after `,`; got nothing");
             raise Misc.Solving_Error;
@@ -419,7 +419,7 @@ package body Parser is
    -- Parse_Instruction --
    -----------------------
 
-   function Parse_Instruction (Self  : in out Instance)
+   function Parse_Instruction (Self : in out Instance)
       return Instruction.Instr_Ptr
    is
       procedure Free is new Ada.Unchecked_Deallocation

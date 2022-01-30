@@ -6,7 +6,7 @@ package body Cpu is
    -- Dump_State --
    ----------------
 
-   procedure Dump_State (Cpu_Instance : in out Cpu) is
+   procedure Dump_State (Cpu_Instance : Cpu) is
    begin
       Put_Line ("Reg A  = " & Integer'Image (Cpu_Instance.Registers (A)));
       Put_Line ("Reg B  = " & Integer'Image (Cpu_Instance.Registers (B)));

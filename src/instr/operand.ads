@@ -19,7 +19,7 @@ package Operand is
             Imm : Misc.Int8;
          when Op_Label =>
             Label         : Misc.Word;
-            Label_Address : Integer;
+            Label_Address : Misc.Address;
          when others =>
             null;
       end case;
@@ -32,7 +32,7 @@ package Operand is
 
    procedure Expand_Label (Self : in out Instance;
                            Labels : Label_List.Label_List.List)
-      with Pre => Self.Op_Type = Op_Label;
+      with Pre  => Self.Op_Type = Op_Label;
    --  Expand labels to its address
 
 end Operand;
