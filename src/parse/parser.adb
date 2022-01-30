@@ -14,6 +14,7 @@ with Instruction.Pop_Instr;
 with Instruction.Push_Instr;
 with Instruction.Store_Instr;
 with Instruction.Sub_Instr;
+with Instruction.Syscall_Instr;
 
 package body Parser is
 
@@ -364,6 +365,18 @@ package body Parser is
    end Parse_Exit;
 
    ----------------
+   -- Parse_Syscall --
+   ----------------
+
+   function Parse_Syscall  (Self  : in out Instance)
+      return Instruction.Instance'Class
+   is
+      Instr    : Instruction.Syscall_Instr.Instance;
+   begin
+      return Instr;
+   end Parse_Syscall;
+
+   ----------------
    -- Initialize --
    ----------------
 
@@ -427,6 +440,8 @@ package body Parser is
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Jmpz);
          when Instruction.Op_exit =>
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Exit);
+        when Instruction.Op_syscall =>
+            Instr_Ptr := new instruction.Instance'Class'(Self.Parse_Syscall);
       end case;
 
       --  There should not be any token left

@@ -1,7 +1,17 @@
-with Ada.Unchecked_Deallocation;
 with Ada.Text_IO; use Ada.Text_IO;
+with syscalls;
+with Cpu;
 
 package body Instruction.Syscall_Instr is
+
+   --------------
+   -- Finalize --
+   --------------
+
+   overriding procedure Finalize (Self : in out Instance) is
+   begin
+      null;
+   end Finalize;
 
    ----------
    -- Dump --
@@ -32,8 +42,8 @@ package body Instruction.Syscall_Instr is
    is
       use Operand;
    begin
-      if Cpu.Registers.A = 1 then
-        Syscall_Table.write()
+      if Cpu_Instance.Registers (Cpu.A) = 1 then
+        Syscalls.write(Cpu_Instance);
       end if;
    end Execute;
 
