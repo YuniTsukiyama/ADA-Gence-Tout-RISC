@@ -1,6 +1,8 @@
 with Ada.Unchecked_Deallocation;
 with Ada.Text_IO; use Ada.Text_IO;
 
+with Misc;
+
 package body Instruction.Load_Instr is
 
    --------------
@@ -57,9 +59,19 @@ package body Instruction.Load_Instr is
    -------------
 
    overriding procedure Execute (Self         : in out Instance;
-                                 Cpu_Instance : in out Cpu.Cpu) is
+                                 Cpu_Instance : in out Cpu.Cpu)
+   is
+      Addr : Misc.Address := 0;
    begin
-      null;
+      if Operand."=" (Self.Base.Op_Type, Operand.Op_Register)
+      then
+         Addr := Cpu_Instance.Registers (Self.Base.Reg);
+      else
+         Addr := Self.Base.Imm;
+      end if;
+
+      Cpu_Instance.Registers (Self.Destination.Reg) :=
+         Cpu_Instance.Memory_Unit.Load_Word (Addr);
    end Execute;
 
 end Instruction.Load_Instr;

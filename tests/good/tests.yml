@@ -173,3 +173,12 @@
     - returncode
     - stdout
     - stderr
+
+- name: Load Store
+  options:
+    - tests/good/load_store.s
+  return_code: 42
+  checks:
+    - returncode
+    - stdout
+    - stderr

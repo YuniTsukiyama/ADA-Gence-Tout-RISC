@@ -51,9 +51,9 @@ Pop a value from the stack and store it in `reg`. Increments the SP accordingly.
 
 Load a value from memory at address `imm8/reg2` and store it in `reg1`.
 
-* STORE imm8/reg1, reg2
+* STORE imm8/reg1, imm8/reg2
 
-Store the content of `reg2` in the memory at address `imm8/reg1`.
+Store the content of `imm8/reg2` in the memory at address `imm8/reg1`.
 
 * JMP label/reg
 

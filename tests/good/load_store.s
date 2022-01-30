@@ -1,6 +1,10 @@
 main:
-    store $42, %A
-    load  %A,  $42
+    store $51, $42
+    load  %A,  $51
+
+    mov   %B,  $101
+
     store %B,  %A
-    load  %A,  %B
+    load  %R,  %B
+
     exit

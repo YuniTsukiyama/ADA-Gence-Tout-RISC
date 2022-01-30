@@ -1,13 +1,16 @@
 Instruction: store
-Base: (immediate) $ 42
-Source: (register) %A
+Base: (immediate) $ 51
+Source: (immediate) $ 42
 Instruction: load
 Destination: (register) %A
-Base: (immediate) $ 42
+Base: (immediate) $ 51
+Instruction: mov
+Destination: (register) %B
+Source: (immediate) $ 101
 Instruction: store
 Base: (register) %B
 Source: (register) %A
 Instruction: load
-Destination: (register) %A
+Destination: (register) %R
 Base: (register) %B
 Instruction: Exit
