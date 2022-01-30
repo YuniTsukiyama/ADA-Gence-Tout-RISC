@@ -1,7 +1,9 @@
 Instruction: push
-Source: (register) %C
+Source: (immediate) $ 42
 Instruction: pop
 Destination: (register) %A
+Instruction: push
+Source: (immediate) $ 51
 Instruction: push
 Source: (register) %A
 Instruction: pop

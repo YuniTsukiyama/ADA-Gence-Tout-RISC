@@ -39,7 +39,7 @@ Compares the contents of `reg1` and `imm8/reg2`. The operation is performed by
 subtracting the second operand from the first operand and then setting the
 status flags in the same manner as the SUB instruction.
 
-* PUSH reg
+* PUSH imm8/reg
 
 Push the content of `reg` onto the stack. Decrements the SP accordingly.
 

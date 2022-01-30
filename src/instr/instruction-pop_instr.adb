@@ -49,7 +49,10 @@ package body Instruction.Pop_Instr is
    overriding procedure Execute (Self         : in out Instance;
                                  Cpu_Instance : in out Cpu.Cpu) is
    begin
-      null;
+      Cpu_Instance.Registers (Self.Destination.Reg) :=
+         Cpu_Instance.Memory_Unit.Load_Word (Cpu_Instance.Registers (Cpu.SP));
+
+      Cpu_Instance.Registers (Cpu.SP) := Cpu_Instance.Registers (Cpu.SP) + 2;
    end Execute;
 
 end Instruction.Pop_Instr;

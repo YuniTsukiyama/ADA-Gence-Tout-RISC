@@ -1,6 +1,8 @@
 with Ada.Unchecked_Deallocation;
 with Ada.Text_IO; use Ada.Text_IO;
 
+with Misc;
+
 package body Instruction.Push_Instr is
 
    --------------
@@ -47,9 +49,21 @@ package body Instruction.Push_Instr is
    -------------
 
    overriding procedure Execute (Self         : in out Instance;
-                                 Cpu_Instance : in out Cpu.Cpu) is
+                                 Cpu_Instance : in out Cpu.Cpu)
+   is
+      Value : Misc.Address;
    begin
-      null;
+      Cpu_Instance.Registers (Cpu.SP) := Cpu_Instance.Registers (Cpu.SP) - 2;
+
+      if Operand."=" (Self.Source.Op_Type, Operand.Op_Register)
+      then
+         Value := Cpu_Instance.Registers (Self.Source.Reg);
+      else
+         Value := Self.Source.Imm;
+      end if;
+
+      Cpu_Instance.Memory_Unit.Store_Word
+         (Cpu_Instance.Registers (Cpu.SP), Value);
    end Execute;
 
 end Instruction.Push_Instr;

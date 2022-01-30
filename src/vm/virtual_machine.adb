@@ -46,13 +46,13 @@ package body Virtual_Machine is
 
             Instruction_List.Instruction_List.Element
                (Instr_Cursor).Execute (Cpu_Inst);
-
-            if Trace then
-               Cpu.Dump_State (Cpu_Inst);
-            end if;
          end;
 
          Cpu_Inst.Registers (Cpu.IP) := Cpu_Inst.Registers (Cpu.IP) + 1;
+
+         if Trace then
+            Cpu.Dump_State (Cpu_Inst);
+         end if;
       end loop;
 
       return Cpu_Inst.Registers (Cpu.R);

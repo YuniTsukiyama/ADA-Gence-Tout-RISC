@@ -24,7 +24,7 @@ package Misc is
    subtype Int16 is Integer range -32768 .. 32767;
    --  Registers are 16 bit signed integer values
 
-   subtype Address is Integer range 0 .. 65535;
+   subtype Address is Integer range 0 .. 32767;
    --  Addresses can be contained on 16bits and are strictly positive
 
    subtype Word is Unbounded_String;
