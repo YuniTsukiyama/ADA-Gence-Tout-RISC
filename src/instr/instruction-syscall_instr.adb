@@ -1,6 +1,5 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with syscalls;
-with Cpu;
+with Syscalls;
 
 package body Instruction.Syscall_Instr is
 
@@ -18,7 +17,6 @@ package body Instruction.Syscall_Instr is
    ----------
 
    overriding procedure Dump (Self : in out Instance) is
-      use Operand;
    begin
       Put_Line ("Instruction: syscall");
    end Dump;
@@ -40,11 +38,12 @@ package body Instruction.Syscall_Instr is
    overriding procedure Execute (Self         : in out Instance;
                                  Cpu_Instance : in out Cpu.Cpu)
    is
-      use Operand;
    begin
-      if Cpu_Instance.Registers (Cpu.A) = 1 then
-        Syscalls.write(Cpu_Instance);
-      end if;
+      case Cpu_Instance.Registers (Cpu.A) is
+         when 1 => Syscalls.Write (Cpu_Instance);
+         when 2 => Syscalls.Read (Cpu_Instance);
+         when others => Put_Line (Standard_Error, "Syscall not implemented");
+      end case;
    end Execute;
 
 end Instruction.Syscall_Instr;

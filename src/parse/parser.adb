@@ -440,8 +440,8 @@ package body Parser is
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Jmpz);
          when Instruction.Op_exit =>
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Exit);
-        when Instruction.Op_syscall =>
-            Instr_Ptr := new instruction.Instance'Class'(Self.Parse_Syscall);
+         when Instruction.Op_syscall =>
+            Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Syscall);
       end case;
 
       --  There should not be any token left

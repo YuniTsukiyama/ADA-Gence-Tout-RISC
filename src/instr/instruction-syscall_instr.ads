@@ -1,5 +1,4 @@
 with Instruction;
-with Operand;
 with Cpu;
 
 package Instruction.Syscall_Instr is
