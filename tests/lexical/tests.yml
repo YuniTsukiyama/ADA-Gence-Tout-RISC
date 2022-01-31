@@ -57,3 +57,24 @@
     - returncode
     - stdout
     - stderr
+
+- name: Data No Opening Quote
+  options:
+    - tests/lexical/data_no_opening_quote.s
+  stderr_file: data_no_opening_quote.err
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+
+- name: Data No Closing Quote
+  options:
+    - tests/lexical/data_no_closing_quote.s
+  stderr_file: data_no_closing_quote.err
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - stderr

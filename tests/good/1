@@ -276,8 +276,7 @@
 - name: open read write
   stdout_file: open_read_write.in
   options:
-    - tests/good/open_read_write.s
-  return_code: 3
+    - tests/good/read_write.s
   checks:
     - returncode
     - stdout

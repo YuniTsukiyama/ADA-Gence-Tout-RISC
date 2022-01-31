@@ -145,6 +145,11 @@ package body Lexer is
          Self.Pos := Self.Pos + 1;
       end loop;
 
+      --  No closing double quote
+      if not (Self.Pos <= Self.Input'Last) then
+         raise Misc.Solving_Error;
+      end if;
+
       Self.Pos := Self.Pos + 1;
 
       return Tok;

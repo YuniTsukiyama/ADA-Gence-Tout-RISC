@@ -77,3 +77,23 @@
     - returncode
     - stdout
     - stderr
+
+- name: Data No Str
+  options:
+    - tests/syntax/data_no_str.s
+  stderr_file: data_no_str.err
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Data No Label
+  options:
+    - tests/syntax/data_no_label.s
+  stderr_file: data_no_label.err
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - stderr
