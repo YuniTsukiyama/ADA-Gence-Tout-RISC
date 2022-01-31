@@ -69,6 +69,11 @@ set.
 Stop the program execution. The return value of the program is the value stored
 in the register %R.
 
+* SYSCALL
+
+Invoke the syscall referenced by the value stored in the register A. More
+information in the *Syscalls Table* section.
+
 ## Registers
 
 A  : General Purpose Register 1 - Argument 1
@@ -112,21 +117,70 @@ The NEGATIVE flag is set when an operation results in a negative value.
 
 ## Syscalls Table
 
-There are four syscalls in this processor. To call a syscall, you have to put
-in the A register the number of the syscall you want to call, in the B register
-the first argument, C register the second argument and D register the third
-argument, and then use the syscall instruction.
+Syscalls are invoked using the SYSCALL instruction. The instruction looks for
+the syscall using the value stored in register A. Each arguments of the syscall
+shall be retrieved from the general purpose registers in the same order. Extra
+arguments shall be retrieved from the stack.
 
-1. Write (File Descriptor, Addr of the buffer, Size to write).
-   No return value.
-2. Read (File Descriptor, Addr of the buffer, Size to read).
-   No return value.
-3. Open (Addr of the file name, Mode).
-   The new file descriptor will be returned in the R register.
+Here is the list of all implemented syscalls:
 
-   Careful : When creating a file, if the file exists, it will be
-   destroyed and re-created.
-   The modes are as follow : 1. Write and create file, 2. Read existing file,
-   3. Write an existing file, 4. append to an existing file.
-   There are no read / write.
-4. Close (FD to close).
+* 1: Write
+
+  Arguments:
+    - FD  : File Descriptor
+    - Addr: Buffer Address
+    - Size: Buffer Size
+
+  Description:
+    Write **Size** characters from the buffer at the address **Addr** in the
+    file referenced by **FD**.
+
+  Return Value:
+    None
+
+* 2: Read
+
+  Arguments:
+    - FD  : File Descriptor
+    - Addr: Buffer Address
+    - Size: Buffer Size
+
+  Description:
+    Read **Size** characters from the file referenced by **FD** into the buffer
+    at the address **Addr**.
+
+  Return Value:
+    None
+
+* 3: Open
+
+  Arguments:
+    - Addr: File Name Address
+    - Mode: Opening Mode
+
+  Description:
+    Open the file specified by **Addr**.
+
+    Modes:
+      - 1: Create and Write into a file
+      - 2: Read an existing file,
+      - 3: Write to an existing file
+      - 4: Append to an existing file
+    There is no Read/Write mode.
+
+    When creating a file, if the file already exists, it will be overwrited.
+
+  Return Value:
+    File Descriptor referencing the opened file.
+
+* 4: Close
+
+  Arguments:
+    - FD: File Descriptor
+
+
+  Description:
+    Close the file descriptor **FD**.
+
+  Return Value:
+    None
