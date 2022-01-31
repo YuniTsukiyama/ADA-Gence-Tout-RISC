@@ -1,5 +1,6 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with Misc;
 
 package body Syscalls is
 
@@ -22,7 +23,7 @@ package body Syscalls is
   -------------
   -- Read --
   -------------
-  
+
    procedure Read (Cpu_Instance : in out Cpu.Cpu) is
       I  : Integer;
    begin
@@ -40,5 +41,19 @@ package body Syscalls is
       end case;
 
    end Read;
+
+  -------------
+  -- Open --
+  -------------
+
+   procedure Open (Cpu_Instance : in out Cpu.Cpu) is
+      S : Misc.Word;
+   begin
+      
+   end Read;
+
+   -------------
+  -- Close --
+  -------------
 
 end Syscalls;

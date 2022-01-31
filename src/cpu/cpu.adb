@@ -29,4 +29,19 @@ package body Cpu is
       Cpu_Instance.Registers (F) := Misc.Int16 (Flags);
    end Set_Flags;
 
+   --------------
+   -- First_FD --
+   --------------
+
+   function First_FD (Cpu_Instance : Cpu) return Integer is
+      I : Integer := 3;
+   begin
+      while Is_Open (Cpu_Instance.FD_Bank_Unit (I)) loop
+         I := I + 1;
+      end loop;
+
+      return I;
+
+   end First_FD;
+
 end Cpu;
