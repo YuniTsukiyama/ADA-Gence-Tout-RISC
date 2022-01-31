@@ -109,3 +109,24 @@ The zero flag is set when an operation results in a zero value.
 * N: NEGATIVE
 
 The NEGATIVE flag is set when an operation results in a negative value.
+
+## Syscalls Table
+
+There are four syscalls in this processor. To call a syscall, you have to put
+in the A register the number of the syscall you want to call, in the B register
+the first argument, C register the second argument and D register the third
+argument, and then use the syscall instruction.
+
+1. Write (File Descriptor, Addr of the buffer, Size to write).
+   No return value.
+2. Read (File Descriptor, Addr of the buffer, Size to read).
+   No return value.
+3. Open (Addr of the file name, Mode).
+   The new file descriptor will be returned in the R register.
+
+   Careful : When creating a file, if the file exists, it will be
+   destroyed and re-created.
+   The modes are as follow : 1. Write and create file, 2. Read existing file,
+   3. Write an existing file, 4. append to an existing file.
+   There are no read / write.
+4. Close (FD to close).

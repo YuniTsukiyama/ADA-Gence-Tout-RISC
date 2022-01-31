@@ -42,6 +42,8 @@ package body Instruction.Syscall_Instr is
       case Cpu_Instance.Registers (Cpu.A) is
          when 1 => Syscalls.Write (Cpu_Instance);
          when 2 => Syscalls.Read (Cpu_Instance);
+         when 3 => Syscalls.Open (Cpu_Instance);
+         when 4 => Syscalls.Close (Cpu_Instance);
          when others => Put_Line (Standard_Error, "Syscall not implemented");
       end case;
    end Execute;
