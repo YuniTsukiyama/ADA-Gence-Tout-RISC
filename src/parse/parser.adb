@@ -3,6 +3,7 @@ with Ada.Unchecked_Deallocation;
 
 with Instruction.Add_Instr;
 with Instruction.And_Instr;
+with Instruction.Call_Instr;
 with Instruction.Cmp_Instr;
 with Instruction.Exit_Instr;
 with Instruction.Jmp_Instr;
@@ -13,6 +14,7 @@ with Instruction.Nor_Instr;
 with Instruction.Or_Instr;
 with Instruction.Pop_Instr;
 with Instruction.Push_Instr;
+with Instruction.Ret_Instr;
 with Instruction.Store_Instr;
 with Instruction.Sub_Instr;
 with Instruction.Syscall_Instr;
@@ -398,6 +400,38 @@ package body Parser is
    end Parse_Syscall;
 
    ----------------
+   -- Parse_Call --
+   ----------------
+
+   function Parse_Call  (Self  : in out Instance)
+      return Instruction.Instance'Class
+   is
+      Instr : Instruction.Call_Instr.Instance;
+   begin
+      --  Parse label operand
+      Instr.Label := new Operand.Instance'(Self.Parse_Operand);
+
+      return Instr;
+
+   exception
+      when Misc.Solving_Error =>
+         Instr.Finalize;
+         raise Misc.Solving_Error;
+   end Parse_Call;
+
+   ---------------
+   -- Parse_Ret --
+   ---------------
+
+   function Parse_Ret   (Self  : in out Instance)
+      return Instruction.Instance'Class
+   is
+      Instr : Instruction.Ret_Instr.Instance;
+   begin
+      return Instr;
+   end Parse_Ret;
+
+   ----------------
    -- Initialize --
    ----------------
 
@@ -465,6 +499,10 @@ package body Parser is
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Syscall);
          when Instruction.Op_jmp =>
             Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Jmp);
+         when Instruction.Op_call =>
+            Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Call);
+         when Instruction.Op_ret =>
+            Instr_Ptr := new Instruction.Instance'Class'(Self.Parse_Ret);
       end case;
 
       --  There should not be any token left

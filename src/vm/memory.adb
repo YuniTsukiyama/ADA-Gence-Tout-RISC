@@ -1,5 +1,3 @@
-with Interfaces; use Interfaces;
-
 package body Memory is
 
    ---------------
@@ -9,19 +7,19 @@ package body Memory is
    function Load_Word (Self : in out Instance; Addr : Misc.Address)
       return Misc.Int16
    is
-      Word : Misc.Int16 := 0;
+      Word : Unsigned_16 := 0;
    begin
       if Addr = Misc.Address'Last then
          raise Out_Of_Memory_Error;
       end if;
 
-      Word := Word + Self.Memory (Addr);
+      Word := Word + Unsigned_16 (Self.Memory (Addr));
 
-      Word := Misc.Int16 (Shift_Left (Unsigned_16 (Word), 8));
+      Word := Shift_Left (Word, 8);
 
-      Word := Word + Self.Memory (Addr + 1);
+      Word := Word + Unsigned_16 (Self.Memory (Addr + 1));
 
-      return Word;
+      return Misc.Int16 (Word);
    end Load_Word;
 
    ---------------
@@ -31,7 +29,7 @@ package body Memory is
    function Load_Byte (Self : in out Instance; Addr : Misc.Address)
       return Misc.Int8 is
    begin
-      return Self.Memory (Addr);
+      return Misc.Int8 (Self.Memory (Addr));
    end Load_Byte;
 
    ---------------
@@ -46,9 +44,9 @@ package body Memory is
          raise Out_Of_Memory_Error;
       end if;
 
-      Self.Memory (Addr) := Misc.Int8 (Shift_Right (Unsigned_16 (Value), 8));
+      Self.Memory (Addr) := Unsigned_8 (Shift_Right (Unsigned_16 (Value), 8));
       Self.Memory (Addr + 1) :=
-         Misc.Int8 (Unsigned_16 (Value) and 2#0000000011111111#);
+         Unsigned_8 (Unsigned_16 (Value) and 2#0000000011111111#);
    end Store_Word;
 
    ---------------
@@ -59,7 +57,7 @@ package body Memory is
                          Addr  : Misc.Address;
                          Value : Misc.Int8) is
    begin
-      Self.Memory (Addr) := Value;
+      Self.Memory (Addr) := Unsigned_8 (Value);
    end Store_Byte;
 
 end Memory;

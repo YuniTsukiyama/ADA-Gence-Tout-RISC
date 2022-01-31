@@ -1,10 +1,12 @@
+with Interfaces; use Interfaces;
+
 with Misc;
 
 package Memory is
 
    Out_Of_Memory_Error : exception;
 
-   type Mem_Array is array (Misc.Address) of Misc.Int8;
+   type Mem_Array is array (Misc.Address) of Unsigned_8;
 
    type Instance is tagged record
       Memory : Mem_Array := (others => 0);

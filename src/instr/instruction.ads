@@ -7,6 +7,7 @@ package Instruction is
 
    type Mnemonic is (Op_add,
                      Op_and,
+                     Op_call,
                      Op_cmp,
                      Op_exit,
                      Op_jmp,
@@ -17,6 +18,7 @@ package Instruction is
                      Op_or,
                      Op_pop,
                      Op_push,
+                     Op_ret,
                      Op_store,
                      Op_sub,
                      Op_syscall);

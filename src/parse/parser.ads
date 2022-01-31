@@ -59,5 +59,9 @@ private
       return Instruction.Instance'Class;
    function Parse_Jmp     (Self : in out Instance)
       return Instruction.Instance'Class;
+   function Parse_Call  (Self  : in out Instance)
+      return Instruction.Instance'Class;
+   function Parse_Ret   (Self  : in out Instance)
+      return Instruction.Instance'Class;
 
 end Parser;

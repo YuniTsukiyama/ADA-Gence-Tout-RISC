@@ -174,6 +174,15 @@
     - stdout
     - stderr
 
+- name: Pow 2 ^ 7
+  options:
+    - tests/good/pow_2_7.s
+  return_code: 128
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
 - name: Load Store
   options:
     - tests/good/load_store.s
@@ -205,6 +214,15 @@
   options:
     - tests/good/nor.s
   return_code: 12
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Call Ret
+  options:
+    - tests/good/call_ret.s
+  return_code: 93
   checks:
     - returncode
     - stdout
