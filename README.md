@@ -29,6 +29,10 @@ gprbuild -XBuild=Debug
 ./tests/check.py agtr
 ```
 
+### Testsuite Requirements
+
+- python3
+
 ## Project content
 
 - doc/        Documentation
