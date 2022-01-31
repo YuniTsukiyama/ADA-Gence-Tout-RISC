@@ -1,3 +1,3 @@
 main:
-    mov %A, $-128
+    mov %A, $-129
     exit

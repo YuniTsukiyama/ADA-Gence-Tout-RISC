@@ -79,6 +79,12 @@ package body Lexer is
          Tok.Immediate := -Tok.Immediate;
       end if;
 
+      if (Tok.Immediate > Misc.Int8'Last)
+         or (Tok.Immediate < Misc.Int8'First)
+      then
+         raise Constraint_Error;
+      end if;
+
       return Tok;
    exception
       when others =>
