@@ -184,3 +184,12 @@ Here is the list of all implemented syscalls:
 
   Return Value:
     None
+
+## File Descriptors
+
+There are 256 file descriptors available numbered from 0 to 255.
+
+Three file descriptors are opened by default and cannot be closed:
+- 0: Standard Input
+- 1: Standard Output
+- 2: Standard Error
