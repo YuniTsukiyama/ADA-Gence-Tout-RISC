@@ -49,7 +49,10 @@ package body Instruction.Mov_Instr is
    overriding procedure Expand_Label (Self   : in out Instance;
                                       Labels : Label_List.Label_List.List) is
    begin
-      null;
+      if Operand."=" (Self.Source.Op_Type, Operand.Op_Label)
+      then
+         Self.Source.Expand_Label (Labels);
+      end if;
    end Expand_Label;
 
    -------------
@@ -57,17 +60,19 @@ package body Instruction.Mov_Instr is
    -------------
 
    overriding procedure Execute (Self         : in out Instance;
-                                 Cpu_Instance : in out Cpu.Cpu)
-   is
-      use Operand;
+                                 Cpu_Instance : in out Cpu.Cpu) is
    begin
-      if Self.Source.Op_Type = Operand.Op_Register
+      if Operand."=" (Self.Source.Op_Type, Operand.Op_Register)
       then
          Cpu_Instance.Registers (Self.Destination.Reg) :=
             Cpu_Instance.Registers (Self.Source.Reg);
-      else
+      elsif Operand."=" (Self.Source.Op_Type, Operand.Op_Immediate)
+      then
          Cpu_Instance.Registers (Self.Destination.Reg) :=
             Self.Source.Imm;
+      else
+         Cpu_Instance.Registers (Self.Destination.Reg) :=
+            Self.Source.Label_Address;
       end if;
    end Execute;
 

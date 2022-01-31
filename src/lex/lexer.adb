@@ -127,6 +127,34 @@ package body Lexer is
       return Tok;
    end Lex_Word;
 
+   ----------------
+   -- Lex_String --
+   ----------------
+
+   function Lex_String (Self : in out Instance) return Token is
+      Tok : Token (String);
+   begin
+      Self.Pos := Self.Pos + 1;
+
+      Tok.Value := Null_Unbounded_String;
+
+      while (Self.Pos <= Self.Input'Last)
+         and then (Self.Input (Self.Pos) /= '"')
+      loop
+         Append (Tok.Value, Self.Input (Self.Pos));
+         Self.Pos := Self.Pos + 1;
+      end loop;
+
+      Self.Pos := Self.Pos + 1;
+
+      return Tok;
+
+   exception
+      when Misc.Solving_Error =>
+         Misc.Err ("invalid data string");
+         raise Misc.Solving_Error;
+   end Lex_String;
+
    -----------------
    -- Lex_Newline --
    -----------------
@@ -165,6 +193,7 @@ package body Lexer is
          when ','        => return Self.Lex_Separator;
          when ':'        => return Self.Lex_Colon;
          when 'a' .. 'z' => return Self.Lex_Word;
+         when '"'        => return Self.Lex_String;
          when others     => raise Misc.Solving_Error;
       end case;
    end Lex_Tok;

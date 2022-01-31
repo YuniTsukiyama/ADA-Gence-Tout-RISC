@@ -227,3 +227,21 @@
     - returncode
     - stdout
     - stderr
+
+- name: Data Section
+  options:
+    - tests/good/data_section.s
+  return_code: 83
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Multiple Data Sections
+  options:
+    - tests/good/multiple_data_sections.s
+  return_code: 18
+  checks:
+    - returncode
+    - stdout
+    - stderr

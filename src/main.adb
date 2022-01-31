@@ -2,6 +2,7 @@ with Ada.Command_Line; use Ada.Command_Line;
 with Ada.Text_IO; use Ada.Text_IO;
 
 with Cli;
+with Cpu;
 with Instruction;
 with Instruction_List;
 with Label;
@@ -16,6 +17,7 @@ procedure Main is
    Instrs      : Instruction_List.Instruction_List.List;
    Labels      : Label_List.Label_List.List;
    Parser_Inst : Parser.Instance;
+   Cpu_Inst    : Cpu.Cpu;
 begin
    Cli.Parse_Options (Opt);
 
@@ -44,6 +46,8 @@ begin
          if Curr_Line /= "" then
             Parser_Inst.Initialize (new String'(Curr_Line));
 
+            exit when Parser_Inst.Is_Data_Section;
+
             --  Parse it
             if Parser_Inst.Is_Label then
                declare
@@ -56,6 +60,21 @@ begin
             else
                Instrs.Append (Parser_Inst.Parse_Instruction);
             end if;
+         end if;
+      end;
+   end loop;
+
+   --  Parse data section
+   while not End_Of_File (File) loop
+      declare
+         --  Get the next line
+         Curr_Line : constant String := Get_Line (File);
+      begin
+         --  If the line is not empty
+         if Curr_Line /= "" then
+            Parser_Inst.Initialize (new String'(Curr_Line));
+
+            Labels.Append (Parser_Inst.Parse_Data (Cpu_Inst));
          end if;
       end;
    end loop;
@@ -100,7 +119,8 @@ begin
          Return_Value : Integer := 0;
          Main         : constant Misc.Address := Label_List.Find_Main (Labels);
       begin
-         Return_Value := Virtual_Machine.Execute (Instrs, Main, Opt.Trace);
+         Return_Value :=
+            Virtual_Machine.Execute (Instrs, Main, Opt.Trace, Cpu_Inst);
          Ada.Command_Line.Set_Exit_Status (Exit_Status (Return_Value));
       end;
    end if;

@@ -6,6 +6,7 @@ with Misc;
 package Lexer is
 
    type Token_Type is (Word,
+                       String,
                        Register,
                        Immediate,
                        Separator,
@@ -16,7 +17,7 @@ package Lexer is
 
    type Token (Tok_Type : Token_Type := None) is record
       case Tok_Type is
-         when Word =>
+         when Word | String =>
             Value : Misc.Word;
          when Register =>
             Register : Cpu.Register_Type;
@@ -77,6 +78,7 @@ private
    function Lex_Separator (Self : in out Instance) return Token;
    function Lex_Colon     (Self : in out Instance) return Token;
    function Lex_Word      (Self : in out Instance) return Token;
+   function Lex_String    (Self : in out Instance) return Token;
    function Lex_Newline   (Self : Instance)        return Token;
    function Lex_Error     (Self : Instance)        return Token;
    --  Lex a specific token

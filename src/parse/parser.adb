@@ -449,6 +449,15 @@ package body Parser is
       return Self.Lexer_Inst.Lookahead_Tok.Tok_Type = Lexer.Colon;
    end Is_Label;
 
+   ---------------------
+   -- Is_Data_Section --
+   ---------------------
+
+   function Is_Data_Section (Self : in out Instance) return Boolean is
+   begin
+      return Self.Lexer_Inst.Input.all = ".data";
+   end Is_Data_Section;
+
    -----------------------
    -- Parse_Instruction --
    -----------------------
@@ -537,5 +546,38 @@ package body Parser is
 
       Self.Lexer_Inst.Discard_Tok;
    end Parse_Label;
+
+   ----------------
+   -- Parse_Data --
+   ----------------
+
+   function Parse_Data (Self : in out Instance; Cpu_Inst : in out Cpu.Cpu)
+      return Label.Label
+   is
+      Curr_Tok : Lexer.Token;
+      Symbol   : Unbounded_String;
+      Address  : Misc.Address;
+   begin
+      Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.Word);
+      Symbol   := Curr_Tok.Value;
+
+      Curr_Tok := Self.Lexer_Inst.Expect_Tok (Lexer.String);
+
+      Address := Self.First_Address_Available;
+
+      declare
+         Str : constant String := To_String (Curr_Tok.Value);
+      begin
+         for I in Str'First .. Str'Last loop
+            Cpu_Inst.Memory_Unit.Store_Byte (Address + I - 1,
+                                             Character'Pos (Str (I)));
+         end loop;
+
+         Self.First_Address_Available := Self.First_Address_Available
+                                         + Str'Length + 1;
+      end;
+
+      return (Symbol => Symbol, Address => Address);
+   end Parse_Data;
 
 end Parser;

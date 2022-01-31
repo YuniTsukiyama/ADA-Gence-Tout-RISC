@@ -1,7 +1,5 @@
 with Ada.Text_IO; use Ada.Text_IO;
 
-with Cpu;
-
 package body Virtual_Machine is
 
    -------------
@@ -9,10 +7,10 @@ package body Virtual_Machine is
    -------------
 
    function Execute (Instrs : Instruction_List.Instruction_List.List;
-                     Main_Address : Misc.Address; Trace : Boolean)
+                     Main_Address : Misc.Address; Trace : Boolean;
+                     Cpu_Inst : in out Cpu.Cpu)
       return Misc.Int16
    is
-      Cpu_Inst : Cpu.Cpu;
    begin
       Cpu_Inst.Registers (Cpu.IP) := Main_Address;
 
