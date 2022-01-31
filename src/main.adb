@@ -110,6 +110,9 @@ begin
    Cli.Finalize (Opt);
 
 exception
+   when Name_Error         =>
+      Misc.Err ("no such file or directory `" & Opt.Input_File.all & "`");
+      Cli.Finalize (Opt);
    when Misc.Solving_Error =>
       Instruction_List.Free_Instr_List (Instrs);
       Cli.Finalize (Opt);

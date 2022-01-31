@@ -30,6 +30,7 @@
 - name: Non Existing Input File
   options:
     - non_existing_input_file.s
+  stderr_file: non_existing_input_file.err
   return_code: 1
   checks:
     - returncode
