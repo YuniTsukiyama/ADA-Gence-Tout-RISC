@@ -162,8 +162,8 @@ Here is the list of all implemented syscalls:
     Open the file specified by **Addr**.
 
     Modes:
-      - 1: Create and Write into a file
-      - 2: Read an existing file,
+      - 1: Create a file and Write to it
+      - 2: Read from an existing file
       - 3: Write to an existing file
       - 4: Append to an existing file
     There is no Read/Write mode.

@@ -106,3 +106,13 @@
     - returncode
     - stdout
     - stderr
+
+- name: Syscall Open Non Existing File
+  options:
+    - tests/failure/syscall_open_non_existing_file.s
+  stdout_file: syscall_open_non_existing_file.out
+  return_code: 0
+  checks:
+    - returncode
+    - stdout
+    - stderr
