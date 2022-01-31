@@ -86,3 +86,23 @@
     - returncode
     - stdout
     - stderr
+
+- name: Stack Underflow
+  options:
+    - tests/failure/stack_underflow.s
+  stderr_file: stack_underflow.err
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - stderr
+
+- name: Stack Overflow
+  options:
+    - tests/failure/stack_overflow.s
+  stderr_file: stack_overflow.err
+  return_code: 1
+  checks:
+    - returncode
+    - stdout
+    - stderr

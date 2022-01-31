@@ -113,7 +113,7 @@ exception
    when Name_Error         =>
       Misc.Err ("no such file or directory `" & Opt.Input_File.all & "`");
       Cli.Finalize (Opt);
-   when Misc.Solving_Error =>
+   when Misc.Solving_Error | Cpu.Stack_Underflow | Cpu.Stack_Overflow =>
       Instruction_List.Free_Instr_List (Instrs);
       Cli.Finalize (Opt);
 end Main;

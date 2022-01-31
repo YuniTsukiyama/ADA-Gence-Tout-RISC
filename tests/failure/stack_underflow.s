@@ -1,0 +1,3 @@
+main:
+    pop %A
+    exit

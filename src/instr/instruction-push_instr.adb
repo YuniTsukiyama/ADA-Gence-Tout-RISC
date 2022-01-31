@@ -53,6 +53,11 @@ package body Instruction.Push_Instr is
    is
       Value : Misc.Address;
    begin
+      if Cpu_Instance.Registers (Cpu.SP) = Cpu.Stack_Address'First then
+         Misc.Err ("stack overflow on push instruction");
+         raise Cpu.Stack_Overflow;
+      end if;
+
       Cpu_Instance.Registers (Cpu.SP) := Cpu_Instance.Registers (Cpu.SP) - 2;
 
       if Operand."=" (Self.Source.Op_Type, Operand.Op_Register)

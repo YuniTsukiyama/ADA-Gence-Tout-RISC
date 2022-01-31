@@ -1,6 +1,8 @@
 with Ada.Unchecked_Deallocation;
 with Ada.Text_IO; use Ada.Text_IO;
 
+with Misc;
+
 package body Instruction.Pop_Instr is
 
    --------------
@@ -49,6 +51,13 @@ package body Instruction.Pop_Instr is
    overriding procedure Execute (Self         : in out Instance;
                                  Cpu_Instance : in out Cpu.Cpu) is
    begin
+      if (Cpu_Instance.Registers (Cpu.SP) = Cpu.Stack_Address'Last)
+         or (Cpu_Instance.Registers (Cpu.SP) = Cpu.Stack_Address'Last - 1)
+      then
+         Misc.Err ("stack underflow on pop instruction");
+         raise Cpu.Stack_Underflow;
+      end if;
+
       Cpu_Instance.Registers (Self.Destination.Reg) :=
          Cpu_Instance.Memory_Unit.Load_Word (Cpu_Instance.Registers (Cpu.SP));
 
