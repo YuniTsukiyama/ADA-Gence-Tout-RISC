@@ -200,3 +200,12 @@
     - returncode
     - stdout
     - stderr
+
+- name: Nor
+  options:
+    - tests/good/nor.s
+  return_code: 12
+  checks:
+    - returncode
+    - stdout
+    - stderr
